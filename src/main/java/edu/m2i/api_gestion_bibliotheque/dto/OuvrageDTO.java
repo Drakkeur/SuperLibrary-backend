@@ -12,9 +12,6 @@ public class OuvrageDTO {
 	private LocalDate publishedDate;
 	private String comment;
 	private Boolean availability;
-	public OuvrageDTO() {
-		super();
-	}
 	public String getCote() {
 		return cote;
 	}
