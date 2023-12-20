@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.m2i.api_gestion_bibliotheque.DTO.LoanDTO;
+import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 import edu.m2i.api_gestion_bibliotheque.service.GestionLoanService;
 import jakarta.validation.Valid;
