@@ -11,17 +11,17 @@ import edu.m2i.api_gestion_bibliotheque.repository.TypeOuvrageRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
 
 @Service
-public class GestionTypeOuvrageImp implements GestionTypeOuvrageService {
+public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 	@Autowired
 	TypeOuvrageRepository typeOuvrageRepository;
-	
-	//Lister tous les types d'ouvrages 
+
+	// Lister tous les types d'ouvrages
 	@Override
 	public List<TypeOuvrage> findAll() {
 		return typeOuvrageRepository.findAll();
 	}
 
-	//Ajouter un type d'ouvrage
+	// Sauvegarder un type d'ouvrage
 	@Override
 	public TypeOuvrageDTO save(TypeOuvrage typeOuvrage) {
 		typeOuvrage = typeOuvrageRepository.save(typeOuvrage);
@@ -30,17 +30,10 @@ public class GestionTypeOuvrageImp implements GestionTypeOuvrageService {
 		return typeOuvrageDTO;
 	}
 
-	//Supprimer un type d'ouvrage
+	// Supprimer un type d'ouvrage
 	@Override
 	public void delete(Integer id) {
-		typeOuvrageRepository.deleteById(id);		
-	}
-
-	// Mettre à jour un type d'ouvrage
-	@Override
-	public TypeOuvrageDTO update(Integer id, TypeOuvrage typeOuvrage) {
-		
-		return null;
+		typeOuvrageRepository.deleteById(id);
 	}
 
 }
