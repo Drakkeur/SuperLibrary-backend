@@ -11,7 +11,7 @@ import edu.m2i.api_gestion_bibliotheque.repository.TypeOuvrageRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
 
 @Service
-public class GestionTypeOuvrageImp implements GestionTypeOuvrageService {
+public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 	@Autowired
 	TypeOuvrageRepository typeOuvrageRepository;
 	
