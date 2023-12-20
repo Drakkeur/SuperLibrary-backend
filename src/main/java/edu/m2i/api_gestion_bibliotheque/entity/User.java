@@ -70,8 +70,8 @@ public class User {
 		return creationDate;
 	}
 
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
+	public void setCreationDate() {
+		this.creationDate = LocalDate.now();
 	}
 
 	public String getLogin() {
