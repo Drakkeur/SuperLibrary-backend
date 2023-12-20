@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.m2i.api_gestion_bibliotheque.DTO.LoanDTO;
+import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 import edu.m2i.api_gestion_bibliotheque.repository.LoanRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionLoanService;

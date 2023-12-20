@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import edu.m2i.api_gestion_bibliotheque.DTO.TypeOuvrageDTO;
+import edu.m2i.api_gestion_bibliotheque.dto.TypeOuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
 import edu.m2i.api_gestion_bibliotheque.repository.TypeOuvrageRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;

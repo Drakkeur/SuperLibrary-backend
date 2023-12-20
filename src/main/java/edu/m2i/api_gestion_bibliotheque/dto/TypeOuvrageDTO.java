@@ -1,4 +1,4 @@
-package edu.m2i.api_gestion_bibliotheque.DTO;
+package edu.m2i.api_gestion_bibliotheque.dto;
 
 import jakarta.validation.constraints.NotNull;
 

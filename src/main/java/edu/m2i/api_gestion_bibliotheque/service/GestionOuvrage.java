@@ -2,7 +2,7 @@ package edu.m2i.api_gestion_bibliotheque.service;
 
 import java.util.List;
 
-import edu.m2i.api_gestion_bibliotheque.DTO.OuvrageDTO;
+import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
 
 public interface GestionOuvrage {
