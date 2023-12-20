@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
 import edu.m2i.api_gestion_bibliotheque.repository.UserRepository;
-import edu.m2i.api_gestion_bibliotheque.service.UserService;
+import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
 
-public class UserServiceImp implements UserService {
-	
+public class GestionUserServiceImp implements GestionUserService {
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Override
 	public UserDTO save(User user) {
 		user = userRepository.save(user);
