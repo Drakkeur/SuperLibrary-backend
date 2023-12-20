@@ -29,15 +29,13 @@ public class Loan {
 	private Integer status;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_ouvrage")
+	@JoinColumn(name = "id_ouvrage", nullable = false)
 	@JsonIgnoreProperties
-	@Column(nullable = false)
 	private Ouvrage ouvrage;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_user")
+	@JoinColumn(name = "id_user", nullable = false)
 	@JsonIgnoreProperties
-	@Column(nullable = false)
 	private User user;
 
 	public Loan() {
