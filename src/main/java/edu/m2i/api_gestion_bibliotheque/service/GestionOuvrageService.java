@@ -11,7 +11,7 @@ public interface GestionOuvrageService {
 
 	public List<Ouvrage> getOuvrage(String filter);
 
-	public OuvrageDTO findById(Integer id);
+	public Ouvrage findById(Integer id);
 
 	public OuvrageDTO save(Ouvrage ouvrage);
 

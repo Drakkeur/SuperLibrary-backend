@@ -28,7 +28,7 @@ public class OuvrageDTO {
 	private String comment;
 
 	private Boolean availability;
-
+	
 	private TypeOuvrage typeOuvrage;
 
 	public TypeOuvrage getTypeOuvrage() {
@@ -36,7 +36,7 @@ public class OuvrageDTO {
 	}
 
 	public void setTypeOuvrage(TypeOuvrage typeOuvrage) {
-		// TODO
+		this.typeOuvrage = typeOuvrage;
 	}
 
 	public String getCote() {
@@ -110,5 +110,5 @@ public class OuvrageDTO {
 	public void setAvailability(Boolean availability) {
 		this.availability = availability;
 	}
-
+	
 }
