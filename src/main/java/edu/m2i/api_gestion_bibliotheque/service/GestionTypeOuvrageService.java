@@ -13,6 +13,4 @@ public interface GestionTypeOuvrageService {
 
 	void delete(Integer id);
 
-	TypeOuvrageDTO update(Integer id, TypeOuvrage typeOuvrage);
-
 }
