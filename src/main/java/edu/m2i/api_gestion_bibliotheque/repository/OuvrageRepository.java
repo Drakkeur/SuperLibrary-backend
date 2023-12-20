@@ -9,8 +9,7 @@ import org.springframework.stereotype.Repository;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
 
 @Repository
-public interface OuvrageRepository extends JpaRepository<Ouvrage, Integer>{
-	
-		@Query("SELECT o FROM Ouvrage o WHERE (o.title LIKE ('%?1%')) OR (o.main_author LIKE ('%?1%')) OR (o.other_author LIKE ('%?1%'))")
-		List<Ouvrage> getOuvrage(String filter);
+public interface OuvrageRepository extends JpaRepository<Ouvrage, Integer> {
+
+	List<Ouvrage> findByTitleOrMainAuthorOrOtherAuthorContaining(String filter1, String filter2, String filter3);
 }

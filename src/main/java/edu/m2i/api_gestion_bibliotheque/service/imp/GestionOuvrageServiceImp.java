@@ -28,7 +28,7 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 
 	@Override
 	public List<Ouvrage> getOuvrage(String filter) {
-		return ouvrageRepository.getOuvrage(filter);
+		return ouvrageRepository.findByTitleOrMainAuthorOrOtherAuthorContaining(filter, filter, filter);
 	}
 
 	@Override
