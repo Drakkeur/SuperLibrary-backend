@@ -38,9 +38,8 @@ public class Ouvrage {
 	private Boolean availability;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_typeOuvrage")
+	@JoinColumn(name = "id_typeOuvrage", nullable = false)
 	@JsonIgnoreProperties
-	@Column(nullable = false)
 	private TypeOuvrage typeOuvrage;
 
 	@OneToMany(mappedBy = "ouvrage", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
