@@ -55,16 +55,16 @@ public class Loan {
 		return dateStart;
 	}
 
-	public void setDateStart(LocalDate dateStart) {
-		this.dateStart = dateStart;
+	public void setDateStart() {
+		this.dateStart = LocalDate.now();
 	}
 
 	public LocalDate getTheoreticalDateEnd() {
 		return theoreticalDateEnd;
 	}
 
-	public void setTheoreticalDateEnd(LocalDate theoreticalDateEnd) {
-		this.theoreticalDateEnd = theoreticalDateEnd;
+	public void setTheoreticalDateEnd() {
+		this.theoreticalDateEnd = this.dateStart.plusWeeks(2);
 	}
 
 	public LocalDate getRealDateEnd() {
