@@ -3,12 +3,14 @@ package edu.m2i.api_gestion_bibliotheque.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
 import edu.m2i.api_gestion_bibliotheque.repository.OuvrageRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
 
+@Service
 public class GestionOuvrageServiceImp implements GestionOuvrageService {
 
 	@Autowired
@@ -26,7 +28,7 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 
 	@Override
 	public List<Ouvrage> getOuvrage(String filter) {
-		return ouvrageRepository.getOuvrage(filter);
+		return ouvrageRepository.findByTitleOrMainAuthorOrOtherAuthorContaining(filter, filter, filter);
 	}
 
 	@Override

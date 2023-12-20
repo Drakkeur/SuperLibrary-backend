@@ -1,10 +1,15 @@
 package edu.m2i.api_gestion_bibliotheque.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,5 +59,14 @@ public class GestionTypeOuvrageController {
 		TypeOuvrage typeOuvrage = new TypeOuvrage();
 		typeOuvrage.setName(typeOuvrageDTO.getName());
 		gestionTypeOuvrageService.save(typeOuvrage);
+	}
+
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public Map<String, String> handleValidationException(MethodArgumentNotValidException e) {
+		Map<String, String> erreurs = new HashMap<>();
+		e.getBindingResult().getAllErrors()
+				.forEach(err -> erreurs.put(((FieldError) err).getField(), err.getDefaultMessage()));
+		return erreurs;
 	}
 }

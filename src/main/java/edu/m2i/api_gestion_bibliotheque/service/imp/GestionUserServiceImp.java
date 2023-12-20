@@ -3,12 +3,14 @@ package edu.m2i.api_gestion_bibliotheque.service.imp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
 import edu.m2i.api_gestion_bibliotheque.repository.UserRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
 
+@Service
 public class GestionUserServiceImp implements GestionUserService {
 
 	@Autowired
