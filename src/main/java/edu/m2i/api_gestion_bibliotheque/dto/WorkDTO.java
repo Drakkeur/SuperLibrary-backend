@@ -7,8 +7,6 @@ import jakarta.validation.constraints.Size;
 
 public class WorkDTO {
 
-	private String cote;
-
 	@NotNull(message = "Titre obligatoire")
 	@Size(min = 5, max = 50, message = "Nombre de caratères compris entre 5 et 50")
 	private String title;
@@ -21,8 +19,7 @@ public class WorkDTO {
 	private String otherAuthor;
 
 	@NotNull(message = "Genre obligatoire")
-	@Size(min = 3, max = 30, message = "Nombre de caratères compris entre 3 et 30")
-	private String genre;
+	private Integer idGenreWork;
 
 	@NotNull(message = "Editeur obligatoire")
 	@Size(min = 3, max = 30, message = "Nombre de caratères compris entre 3 et 30")
@@ -45,13 +42,13 @@ public class WorkDTO {
 	public void setIdTypeWork(Integer idTypeWork) {
 		this.idTypeWork = idTypeWork;
 	}
-
-	public String getCote() {
-		return cote;
+	
+	public Integer getGenreWork() {
+		return idGenreWork;
 	}
 
-	public void setCote(String cote) {
-		this.cote = cote;
+	public void setGenreWork(Integer idGenreWork) {
+		this.idGenreWork = idGenreWork;
 	}
 
 	public String getTitle() {
@@ -78,13 +75,6 @@ public class WorkDTO {
 		this.otherAuthor = otherAuthor;
 	}
 
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
 
 	public String getEditor() {
 		return editor;
