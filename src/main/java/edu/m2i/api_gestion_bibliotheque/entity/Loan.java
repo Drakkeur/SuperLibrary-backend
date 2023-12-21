@@ -3,7 +3,9 @@ package edu.m2i.api_gestion_bibliotheque.entity;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,6 +17,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity(name = "Loan")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Loan {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -126,8 +129,7 @@ public class Loan {
 	@Override
 	public String toString() {
 		return "Loan [id=" + id + ", dateStart=" + dateStart + ", theoreticalDateEnd=" + theoreticalDateEnd
-				+ ", realDateEnd=" + realDateEnd + ", status=" + status + ", work=" + work + ", user=" + user
-				+ "]";
+				+ ", realDateEnd=" + realDateEnd + ", status=" + status + ", work=" + work + ", user=" + user + "]";
 	}
 
 }

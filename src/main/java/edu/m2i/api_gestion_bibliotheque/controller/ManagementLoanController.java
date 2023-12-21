@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
-import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementUserService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
@@ -34,6 +34,8 @@ public class ManagementLoanController {
 	ManagementLoanService managementLoanService;
 	@Autowired
 	ManagementWorkService managementWorkService;
+	@Autowired
+	ManagementUserService managementUserService;
 
 	// Récupérer la liste complète des emprunts
 	@GetMapping("/all")
@@ -48,14 +50,14 @@ public class ManagementLoanController {
 	}
 
 	// Récupérer la liste des emprunts d'un ouvrage
-	@GetMapping("/loan-ouvrage/{id}")
+	@GetMapping("/loan-work/{id}")
 	public List<Loan> getLoanOuvrage(@PathVariable("id") Integer id) {
 		return managementLoanService.getByWork(id);
 	}
 
 	// Récupérer la liste des emprunts par status
-	@GetMapping("/loan-status")
-	public List<Loan> getLoanStatus(@RequestBody String status) {
+	@GetMapping("/loan-status/{code}")
+	public List<Loan> getLoanStatus(@PathVariable("code") Integer status) {
 		return managementLoanService.getByStatus(status);
 	}
 
@@ -73,19 +75,17 @@ public class ManagementLoanController {
 		loan.setDateStart();
 		loan.setTheoreticalDateEnd();
 		loan.setStatus(1);
-		loan.setWork(request.getWork());
-		loan.setUser(request.getUser());
+		loan.setWork(managementWorkService.findById(request.getIdWork()));
+		loan.setUser(managementUserService.findById(request.getIdUser()));
 		managementLoanService.save(loan);
 	}
 
 	// Valider une réservation
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
-
 		managementLoanService.changeStatusLoan(id, "En cours");
 		LoanDTO loanDTO = managementLoanService.findById(id);
-		Work work = loanDTO.getWork();
-		managementWorkService.statusWork(work.getId());
+		managementWorkService.statusWork(loanDTO.getIdWork());
 	}
 
 	// Valider un retour d'emprunt
@@ -93,8 +93,7 @@ public class ManagementLoanController {
 	public void validateReturn(@PathVariable("id") Integer id) {
 		managementLoanService.changeStatusLoan(id, "Terminé");
 		LoanDTO loanDTO = managementLoanService.findById(id);
-		Work work = loanDTO.getWork();
-		managementWorkService.statusWork(work.getId());
+		managementWorkService.statusWork(loanDTO.getIdWork());
 	}
 
 	// Supprimer un emprunt
