@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -24,6 +26,7 @@ public class TypeOuvrage {
 
 	@OneToMany(mappedBy = "typeOuvrage", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
+	@JsonIgnoreProperties
 	private List<Ouvrage> ouvrages;
 
 	public TypeOuvrage() {
@@ -33,7 +36,6 @@ public class TypeOuvrage {
 	public TypeOuvrage(String name) {
 		super();
 		this.name = name;
-		this.count = 0;
 	}
 
 	public Integer getCount() {

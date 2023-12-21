@@ -63,6 +63,7 @@ public class GestionOuvrageController {
 	@PostMapping("/add")
 	public void addOuvrages(@Valid @RequestBody OuvrageDTO request) {
 		Ouvrage ouvrage = new Ouvrage();
+		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.findById(request.getIdTypeOuvrage());
 		ouvrage.setCote(request.getCote());
 		ouvrage.setTitle(request.getTitle());
 		ouvrage.setMainAuthor(request.getMainAuthor());
@@ -72,9 +73,8 @@ public class GestionOuvrageController {
 		ouvrage.setPublishedDate(request.getPublishedDate());
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
+		ouvrage.setTypeOuvrage(typeOuvrage);
 		gestionOuvrageService.save(ouvrage);
-		TypeOuvrage typeOuvrage = ouvrage.getTypeOuvrage();
 		typeOuvrage.setCount(typeOuvrage.getCount()+1);
 		gestionTypeOuvrageService.save(typeOuvrage);
 	}

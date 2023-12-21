@@ -36,6 +36,11 @@ public class GestionTypeOuvrageController {
 	public List<TypeOuvrage> getAllTypeOuvrage() {
 		return gestionTypeOuvrageService.findAll();
 	}
+	
+	@GetMapping("/{id}")
+	public TypeOuvrage getTypeOuvrage(@PathVariable("id") Integer id) {
+		return gestionTypeOuvrageService.findById(id);
+	}
 
 	// Ajouter un nouveau type d'ouvrage
 	@ResponseStatus(HttpStatus.CREATED)
@@ -43,6 +48,7 @@ public class GestionTypeOuvrageController {
 	public void addTypeOuvrage(@Valid @RequestBody TypeOuvrageDTO request) {
 		TypeOuvrage typeOuvrage = new TypeOuvrage();
 		typeOuvrage.setName(request.getName());
+		typeOuvrage.setCount(0);
 		gestionTypeOuvrageService.save(typeOuvrage);
 	}
 
@@ -56,7 +62,7 @@ public class GestionTypeOuvrageController {
 	// Modifier un type d'ouvrage déjà présent dans la DB
 	@PutMapping("/update/{id}")
 	public void updateTypeOuvrage(@PathVariable("id") Integer id, @RequestBody TypeOuvrageDTO typeOuvrageDTO) {
-		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.getById(id);
+		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.findById(id);
 		typeOuvrage.setName(typeOuvrageDTO.getName());
 		gestionTypeOuvrageService.save(typeOuvrage);
 	}

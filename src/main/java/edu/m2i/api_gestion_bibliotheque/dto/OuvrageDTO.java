@@ -36,8 +36,17 @@ public class OuvrageDTO {
 
 	private Boolean availability;
 
-	@NotNull(message = "Type de l'Ouvrage obligatoire")
 	private TypeOuvrage typeOuvrage;
+	@NotNull(message = "Type de l'Ouvrage obligatoire")
+	private Integer idTypeOuvrage;
+	
+	public Integer getIdTypeOuvrage() {
+		return idTypeOuvrage;
+	}
+
+	public void setIdTypeOuvrage(Integer idTypeOuvrage) {
+		this.idTypeOuvrage = idTypeOuvrage;
+	}
 
 	public TypeOuvrage getTypeOuvrage() {
 		return typeOuvrage;

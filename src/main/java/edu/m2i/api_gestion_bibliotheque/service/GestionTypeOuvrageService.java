@@ -17,6 +17,4 @@ public interface GestionTypeOuvrageService {
 
 	void delete(Integer id);
 
-	TypeOuvrage getById(Integer id);
-
 }
