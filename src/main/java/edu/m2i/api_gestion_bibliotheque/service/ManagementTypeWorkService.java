@@ -13,4 +13,6 @@ public interface ManagementTypeWorkService {
 
 	void delete(Integer id);
 
+	TypeWork getById(Integer id);
+
 }

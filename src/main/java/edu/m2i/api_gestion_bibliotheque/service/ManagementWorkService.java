@@ -7,14 +7,17 @@ import edu.m2i.api_gestion_bibliotheque.entity.Work;
 
 public interface ManagementWorkService {
 
-	public List<Work> findAll();
+	List<Work> findAll();
 
-	public List<Work> getWork(String filter);
+	List<Work> getWork(String filter);
 
-	public Work findById(Integer id);
+	Work findById(Integer id);
 
-	public WorkDTO save(Work work);
+	WorkDTO findByIdDTO(Integer id);
 
-	public void delete(Integer id);
+	WorkDTO save(Work work);
 
+	void delete(Integer id);
+
+	void statusWork(Integer id);
 }

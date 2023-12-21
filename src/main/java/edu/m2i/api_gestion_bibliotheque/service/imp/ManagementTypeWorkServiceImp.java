@@ -36,4 +36,10 @@ public class ManagementTypeWorkServiceImp implements ManagementTypeWorkService {
 		typeWorkRepository.deleteById(id);
 	}
 
+	// Récupérer un type d'ouvrage à partir de l'ID
+	@Override
+	public TypeWork getById(Integer id) {
+		return typeWorkRepository.getReferenceById(id);
+	}
+
 }

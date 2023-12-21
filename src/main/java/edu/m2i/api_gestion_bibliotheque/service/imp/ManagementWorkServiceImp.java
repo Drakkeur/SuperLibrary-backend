@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
 import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.repository.WorkRepository;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
@@ -32,25 +33,57 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 	}
 
 	@Override
-	public WorkDTO save(Work ouvrage) {
-		workRepository.save(ouvrage);
-		WorkDTO ouvrageDTO = new WorkDTO();
-		ouvrageDTO.setCote(ouvrage.getCote());
-		ouvrageDTO.setTitle(ouvrage.getTitle());
-		ouvrageDTO.setMainAuthor(ouvrage.getMainAuthor());
-		ouvrageDTO.setOtherAuthor(ouvrage.getOtherAuthor());
-		ouvrageDTO.setGenre(ouvrage.getGenre());
-		ouvrageDTO.setEditor(ouvrage.getEditor());
-		ouvrageDTO.setPublishedDate(ouvrage.getPublishedDate());
-		ouvrageDTO.setComment(ouvrage.getComment());
-		ouvrageDTO.setAvailability(ouvrage.getAvailability());
-		ouvrageDTO.setTypeWork(ouvrage.getTypeWork());
-		return ouvrageDTO;
+	public WorkDTO save(Work work) {
+		workRepository.save(work);
+		TypeWork typeWork = work.getTypeWork();
+		WorkDTO workDTO = new WorkDTO();
+		workDTO.setCote(work.getCote());
+		workDTO.setTitle(work.getTitle());
+		workDTO.setMainAuthor(work.getMainAuthor());
+		workDTO.setOtherAuthor(work.getOtherAuthor());
+		workDTO.setGenre(work.getGenre());
+		workDTO.setEditor(work.getEditor());
+		workDTO.setPublishedDate(work.getPublishedDate());
+		workDTO.setComment(work.getComment());
+		workDTO.setAvailability(work.getAvailability());
+		workDTO.setIdTypeWork(typeWork.getId());
+		return workDTO;
 	}
 
 	@Override
 	public void delete(Integer id) {
 		workRepository.deleteById(id);
+	}
+
+	@Override
+	public WorkDTO findByIdDTO(Integer id) {
+		Work work = workRepository.getReferenceById(id);
+		TypeWork typeWork = work.getTypeWork();
+		WorkDTO workDTO = new WorkDTO();
+		workDTO.setCote(work.getCote());
+		workDTO.setTitle(work.getTitle());
+		workDTO.setMainAuthor(work.getMainAuthor());
+		workDTO.setOtherAuthor(work.getOtherAuthor());
+		workDTO.setGenre(work.getGenre());
+		workDTO.setEditor(work.getEditor());
+		workDTO.setPublishedDate(work.getPublishedDate());
+		workDTO.setComment(work.getComment());
+		workDTO.setAvailability(work.getAvailability());
+		workDTO.setIdTypeWork(typeWork.getId());
+		return workDTO;
+	}
+
+	@Override
+	public void statusWork(Integer id) {
+		Work work = workRepository.getReferenceById(id);
+		// workRepository.deleteById(id);
+		if (work.getAvailability() == true) {
+			work.setAvailability(false);
+		} else {
+			work.setAvailability(true);
+		}
+		workRepository.save(work);
+
 	}
 
 }
