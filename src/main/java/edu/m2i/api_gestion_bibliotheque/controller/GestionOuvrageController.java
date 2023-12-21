@@ -32,6 +32,7 @@ public class GestionOuvrageController {
 
 	@Autowired
 	GestionOuvrageService gestionOuvrageService;
+	@Autowired
 	GestionTypeOuvrageService gestionTypeOuvrageService;
 
 	@GetMapping("/all")
@@ -39,16 +40,16 @@ public class GestionOuvrageController {
 		return gestionOuvrageService.findAll();
 	}
 
-	@GetMapping("/{id}")
-	public Ouvrage getOuvrage(@PathVariable("id") Integer id) {
-		return gestionOuvrageService.findById(id);
+	@GetMapping("/id/{id}")
+	public OuvrageDTO getByIdOuvrage(@PathVariable("id") Integer id) {
+		return gestionOuvrageService.findByIdDTO(id);
 	}
-	
+
 	@GetMapping("/{filter}")
-	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter){
+	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter) {
 		return gestionOuvrageService.getOuvrage(filter);
 	}
-	
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteOuvrage(@PathVariable("id") Integer id) {
@@ -74,16 +75,17 @@ public class GestionOuvrageController {
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
 		ouvrage.setTypeOuvrage(typeOuvrage);
+		ouvrage.setTypeOuvrage(gestionTypeOuvrageService.findById(request.getIdTypeOuvrage()));
 		gestionOuvrageService.save(ouvrage);
 		typeOuvrage.setCount(typeOuvrage.getCount()+1);
 		gestionTypeOuvrageService.save(typeOuvrage);
 	}
-	
-	@GetMapping("change-status/{id}")
+
+	@PutMapping("change-status/{id}")
 	public void statusOuvrage(@PathVariable("id") Integer id) {
 		gestionOuvrageService.statusOuvrage(id);
 	}
-	
+
 	@PutMapping("update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody OuvrageDTO request) {
 		Ouvrage ouvrage = gestionOuvrageService.findById(id);
@@ -96,7 +98,7 @@ public class GestionOuvrageController {
 		ouvrage.setPublishedDate(request.getPublishedDate());
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
+		ouvrage.setTypeOuvrage(gestionTypeOuvrageService.findById(request.getIdTypeOuvrage()));
 		gestionOuvrageService.save(ouvrage);
 	}
 
