@@ -44,7 +44,6 @@ public class GestionUserController {
 		User user = new User();
 		user.setAddress(request.getAddress());
 		user.setComment(request.getComment());
-		user.setCreationDate();
 		user.setEmail(request.getEmail());
 		user.setFirstname(request.getFirstname());
 		user.setLogin(request.getLogin());
@@ -63,8 +62,18 @@ public class GestionUserController {
 	}
 	
 	// Mise à jour des informations d'un user
-	@PutMapping("update")
-	public void updateUser(@RequestBody User user) {
+	@PutMapping("update/{id}")
+	public void updateUser(@PathVariable("id") Integer id, @RequestBody UserDTO request) {
+		User user = gestionUserService.findById(id);
+		user.setAddress(request.getAddress());
+		user.setComment(request.getComment());
+		user.setEmail(request.getEmail());
+		user.setFirstname(request.getFirstname());
+		user.setLogin(request.getLogin());
+		user.setName(request.getName());
+		user.setPassword(request.getPassword());
+		user.setPhoneNumber(request.getPhoneNumber());
+		user.setTypeUser(request.getTypeUser());
 		gestionUserService.save(user);
 	}
 	

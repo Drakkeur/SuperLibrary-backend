@@ -20,6 +20,10 @@ public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 	public List<TypeOuvrage> findAll() {
 		return typeOuvrageRepository.findAll();
 	}
+	
+	public TypeOuvrage findById(Integer id) {
+		return typeOuvrageRepository.getReferenceById(id);
+	}
 
 	// Sauvegarder un type d'ouvrage
 	@Override
@@ -34,6 +38,10 @@ public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 	@Override
 	public void delete(Integer id) {
 		typeOuvrageRepository.deleteById(id);
+	}
+	
+	public List<TypeOuvrage> findByName(String name) {
+		return typeOuvrageRepository.findByNameContaining(name);
 	}
 
 }

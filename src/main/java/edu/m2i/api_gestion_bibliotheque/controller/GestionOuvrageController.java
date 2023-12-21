@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
 import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +32,7 @@ public class GestionOuvrageController {
 
 	@Autowired
 	GestionOuvrageService gestionOuvrageService;
+	GestionTypeOuvrageService gestionTypeOuvrageService;
 
 	@GetMapping("/all")
 	public List<Ouvrage> getAllOuvrages() {
@@ -49,6 +52,10 @@ public class GestionOuvrageController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteOuvrage(@PathVariable("id") Integer id) {
+		Ouvrage ouvrage = gestionOuvrageService.findById(id);
+		TypeOuvrage typeOuvrage = ouvrage.getTypeOuvrage();
+		typeOuvrage.setCount(typeOuvrage.getCount()-1);
+		gestionTypeOuvrageService.save(typeOuvrage);
 		gestionOuvrageService.delete(id);
 	}
 
@@ -67,6 +74,9 @@ public class GestionOuvrageController {
 		ouvrage.setAvailability(request.getAvailability());
 		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
 		gestionOuvrageService.save(ouvrage);
+		TypeOuvrage typeOuvrage = ouvrage.getTypeOuvrage();
+		typeOuvrage.setCount(typeOuvrage.getCount()+1);
+		gestionTypeOuvrageService.save(typeOuvrage);
 	}
 	
 	@GetMapping("change-status/{id}")

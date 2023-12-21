@@ -9,7 +9,7 @@ public interface GestionUserService {
 
 	UserDTO save(User user);
 
-	UserDTO findById(Integer id);
+	User findById(Integer id);
 
 	List<User> findAll();
 
