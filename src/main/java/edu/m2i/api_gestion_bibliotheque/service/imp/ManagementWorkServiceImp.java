@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
+import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.repository.WorkRepository;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 
@@ -79,9 +79,10 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 		workRepository.deleteById(id);
 	}
 
+
+	@Override
 	public void statusWork(Integer id) {
 		Work work = workRepository.getReferenceById(id);
-		workRepository.deleteById(id);
 		if (work.getAvailability() == true) {
 			work.setAvailability(false);
 		} else {

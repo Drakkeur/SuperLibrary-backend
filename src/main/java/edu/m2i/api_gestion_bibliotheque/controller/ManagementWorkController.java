@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
-import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -41,7 +41,7 @@ public class ManagementWorkController {
 	}
 
 	@GetMapping("/id/{id}")
-	public WorkDTO getByIdWork(@PathVariable("id") Integer id) {
+	public WorkDTO getOuvrage(@PathVariable("id") Integer id) {
 		return managementWorkService.findByIdDTO(id);
 	}
 
@@ -49,7 +49,7 @@ public class ManagementWorkController {
 	public List<Work> getWorkByTitle(@PathVariable("filter") String filter) {
 		return managementWorkService.getWorkByTitle(filter);
 	}
-	
+
 	@GetMapping("/filter/author={filter}")
 	public List<Work> getWorkByAuthor(@PathVariable("filter") String filter) {
 		return managementWorkService.getWorkByAuthor(filter);
@@ -60,7 +60,7 @@ public class ManagementWorkController {
 	public void deleteWork(@PathVariable("id") Integer id) {
 		Work Work = managementWorkService.findById(id);
 		TypeWork typeWork = Work.getTypeWork();
-		typeWork.setCount(typeWork.getCount()-1);
+		typeWork.setCount(typeWork.getCount() - 1);
 		managementTypeWorkService.save(typeWork);
 		managementWorkService.delete(id);
 	}
@@ -80,6 +80,7 @@ public class ManagementWorkController {
 		work.setComment(request.getComment());
 		work.setAvailability(request.getAvailability());
 		work.setTypeWork(typeWork);
+		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
 		typeWork.setCount(typeWork.getCount()+1);
@@ -103,6 +104,7 @@ public class ManagementWorkController {
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(request.getAvailability());
+		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
 	}

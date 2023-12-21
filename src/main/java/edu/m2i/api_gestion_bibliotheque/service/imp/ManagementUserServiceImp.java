@@ -37,6 +37,24 @@ public class ManagementUserServiceImp implements ManagementUserService {
 	public User findById(Integer id) {
 		return userRepository.getReferenceById(id);
 	}
+	
+	@Override
+	public UserDTO findByIdDTO(Integer id) {
+		User user = userRepository.getReferenceById(id);
+		UserDTO userDTO = new UserDTO();
+		// to do : gérer affichage ou non du login et mot de passe
+		userDTO.setAddress(user.getAddress());
+		userDTO.setComment(user.getComment());
+		userDTO.setCreationDate(user.getCreationDate());
+		userDTO.setEmail(user.getEmail());
+		userDTO.setFirstname(user.getFirstname());
+		userDTO.setLogin(user.getLogin());
+		userDTO.setName(user.getName());
+		userDTO.setPassword(user.getPassword());
+		userDTO.setPhoneNumber(user.getPhoneNumber());
+		userDTO.setTypeUser(user.getTypeUser());
+		return userDTO;
+	}
 
 	@Override
 	public List<User> findAll() {

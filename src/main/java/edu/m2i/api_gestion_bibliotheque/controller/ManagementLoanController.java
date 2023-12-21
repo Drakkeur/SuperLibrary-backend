@@ -31,9 +31,8 @@ import jakarta.validation.Valid;
 public class ManagementLoanController {
 
 	@Autowired
-
 	ManagementLoanService managementLoanService;
-
+	@Autowired
 	ManagementWorkService managementWorkService;
 
 
@@ -88,7 +87,6 @@ public class ManagementLoanController {
 		LoanDTO loanDTO = managementLoanService.findById(id);
 		Work work = loanDTO.getWork();
 		managementWorkService.statusWork(work.getId());
-
 	}
 
 	// Valider un retour d'emprunt

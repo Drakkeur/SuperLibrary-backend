@@ -25,7 +25,7 @@ import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-superlibrary/type-Work")
+@RequestMapping("/api-superlibrary/type-work")
 public class ManagementTypeWorkController {
 
 	@Autowired
