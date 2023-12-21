@@ -16,5 +16,7 @@ public interface GestionOuvrageService {
 	public OuvrageDTO save(Ouvrage ouvrage);
 
 	public void delete(Integer id);
+	
+	public void statusOuvrage(Integer id);
 
 }

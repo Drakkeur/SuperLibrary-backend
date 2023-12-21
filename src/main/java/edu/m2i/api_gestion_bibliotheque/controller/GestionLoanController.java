@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
+import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
 import edu.m2i.api_gestion_bibliotheque.service.GestionLoanService;
+import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +32,7 @@ public class GestionLoanController {
 
 	@Autowired
 	GestionLoanService gestionLoanService;
+	GestionOuvrageService gestionOuvrageService;
 
 	// Récupérer la liste complète des emprunts
 	@GetMapping("/loans")
@@ -78,12 +81,18 @@ public class GestionLoanController {
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
 		gestionLoanService.changeStatusLoan(id, "En cours");
+		LoanDTO loanDTO = gestionLoanService.findById(id);
+		Ouvrage ouvrage = loanDTO.getOuvrage();
+		gestionOuvrageService.statusOuvrage(ouvrage.getId());
 	}
 
 	// Valider un retour d'emprunt
 	@PutMapping("/validate-return/{id}")
 	public void validateReturn(@PathVariable("id") Integer id) {
 		gestionLoanService.changeStatusLoan(id, "Terminé");
+		LoanDTO loanDTO = gestionLoanService.findById(id);
+		Ouvrage ouvrage = loanDTO.getOuvrage();
+		gestionOuvrageService.statusOuvrage(ouvrage.getId());
 	}
 
 	// Supprimer un emprunt
