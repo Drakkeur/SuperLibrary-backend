@@ -36,4 +36,10 @@ public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 		typeOuvrageRepository.deleteById(id);
 	}
 
+	// Récupérer un type d'ouvrage à partir de l'ID
+	@Override
+	public TypeOuvrage getById(Integer id) {
+		return typeOuvrageRepository.getReferenceById(id);
+	}
+
 }
