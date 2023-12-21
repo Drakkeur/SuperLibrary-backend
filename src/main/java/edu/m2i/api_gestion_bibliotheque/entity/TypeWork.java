@@ -22,6 +22,7 @@ public class TypeWork {
 	private Integer id;
 	@Column(nullable = false)
 	private String name;
+	private Integer count;
 
 	@OneToMany(mappedBy = "typeWork", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
@@ -37,6 +38,14 @@ public class TypeWork {
 		this.name = name;
 	}
 
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	
 	public String getName() {
 		return name;
 	}

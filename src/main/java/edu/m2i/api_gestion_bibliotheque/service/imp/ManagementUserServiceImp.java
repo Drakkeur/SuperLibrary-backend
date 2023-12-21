@@ -34,6 +34,11 @@ public class ManagementUserServiceImp implements ManagementUserService {
 	}
 
 	@Override
+	public User findById(Integer id) {
+		return userRepository.getReferenceById(id);
+	}
+	
+	@Override
 	public UserDTO findByIdDTO(Integer id) {
 		User user = userRepository.getReferenceById(id);
 		UserDTO userDTO = new UserDTO();
@@ -59,12 +64,6 @@ public class ManagementUserServiceImp implements ManagementUserService {
 	@Override
 	public void delete(Integer id) {
 		userRepository.deleteById(id);
-	}
-
-	@Override
-	public User findById(Integer id) {
-		User user = userRepository.getReferenceById(id);
-		return user;
 	}
 
 }

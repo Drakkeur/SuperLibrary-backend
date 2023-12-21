@@ -86,7 +86,6 @@ public class ManagementLoanController {
 		LoanDTO loanDTO = managementLoanService.findById(id);
 		Work work = loanDTO.getWork();
 		managementWorkService.statusWork(work.getId());
-
 	}
 
 	// Valider un retour d'emprunt

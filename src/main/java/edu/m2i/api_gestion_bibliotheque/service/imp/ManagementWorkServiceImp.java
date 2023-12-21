@@ -23,13 +23,37 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 	}
 
 	@Override
-	public Work findById(Integer id) {
-		return workRepository.getReferenceById(id);
+	public WorkDTO findByIdDTO(Integer id) {
+		Work work = workRepository.getReferenceById(id);
+		TypeWork typeWork = work.getTypeWork();
+		WorkDTO workDTO = new WorkDTO();
+		workDTO.setCote(work.getCote());
+		workDTO.setTitle(work.getTitle());
+		workDTO.setMainAuthor(work.getMainAuthor());
+		workDTO.setOtherAuthor(work.getOtherAuthor());
+		workDTO.setGenre(work.getGenre());
+		workDTO.setEditor(work.getEditor());
+		workDTO.setPublishedDate(work.getPublishedDate());
+		workDTO.setComment(work.getComment());
+		workDTO.setAvailability(work.getAvailability());
+		workDTO.setIdTypeWork(typeWork.getId());
+		return workDTO;
 	}
 
 	@Override
-	public List<Work> getWork(String filter) {
-		return workRepository.findByTitleOrMainAuthorOrOtherAuthorContaining(filter, filter, filter);
+	public Work findById(Integer id) {
+		Work work = workRepository.getReferenceById(id);
+		return work;
+	}
+
+	@Override
+	public List<Work> getWorkByTitle(String filter) {
+		return workRepository.findByTitleContaining(filter);
+	}
+	
+	@Override
+	public List<Work> getWorkByAuthor(String filter) {
+		return workRepository.findByMainAuthorContaining(filter);
 	}
 
 	@Override
@@ -55,35 +79,16 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 		workRepository.deleteById(id);
 	}
 
-	@Override
-	public WorkDTO findByIdDTO(Integer id) {
-		Work work = workRepository.getReferenceById(id);
-		TypeWork typeWork = work.getTypeWork();
-		WorkDTO workDTO = new WorkDTO();
-		workDTO.setCote(work.getCote());
-		workDTO.setTitle(work.getTitle());
-		workDTO.setMainAuthor(work.getMainAuthor());
-		workDTO.setOtherAuthor(work.getOtherAuthor());
-		workDTO.setGenre(work.getGenre());
-		workDTO.setEditor(work.getEditor());
-		workDTO.setPublishedDate(work.getPublishedDate());
-		workDTO.setComment(work.getComment());
-		workDTO.setAvailability(work.getAvailability());
-		workDTO.setIdTypeWork(typeWork.getId());
-		return workDTO;
-	}
 
 	@Override
 	public void statusWork(Integer id) {
 		Work work = workRepository.getReferenceById(id);
-		// workRepository.deleteById(id);
 		if (work.getAvailability() == true) {
 			work.setAvailability(false);
 		} else {
 			work.setAvailability(true);
 		}
 		workRepository.save(work);
-
 	}
 
 }

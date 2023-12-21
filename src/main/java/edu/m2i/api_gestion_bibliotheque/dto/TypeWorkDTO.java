@@ -6,6 +6,15 @@ public class TypeWorkDTO {
 
 	@NotNull(message = "Nom est obligatoire")
 	private String name;
+	private Integer count;
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
 
 	public String getName() {
 		return name;

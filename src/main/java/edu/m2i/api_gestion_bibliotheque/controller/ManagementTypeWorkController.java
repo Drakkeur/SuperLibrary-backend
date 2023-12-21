@@ -36,27 +36,33 @@ public class ManagementTypeWorkController {
 	public List<TypeWork> getAllTypeWork() {
 		return managementTypeWorkService.findAll();
 	}
+	
+	@GetMapping("/{id}")
+	public TypeWork getTypeWork(@PathVariable("id") Integer id) {
+		return managementTypeWorkService.findById(id);
+	}
 
-	// Ajouter un nouveau type d'ouvrage
+	// Ajouter un nouveau type d'Work
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public void addTypeOuvrage(@Valid @RequestBody TypeWorkDTO request) {
+	public void addTypeWork(@Valid @RequestBody TypeWorkDTO request) {
 		TypeWork typeWork = new TypeWork();
 		typeWork.setName(request.getName());
+		typeWork.setCount(0);
 		managementTypeWorkService.save(typeWork);
 	}
 
-	// Supprimer un type d'ouvrage
+	// Supprimer un type d'Work
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
-	public void deleteTypeOuvrage(@PathVariable("id") Integer id) {
+	public void deleteTypeWork(@PathVariable("id") Integer id) {
 		managementTypeWorkService.delete(id);
 	}
 
-	// Modifier un type d'ouvrage déjà présent dans la DB
+	// Modifier un type d'Work déjà présent dans la DB
 	@PutMapping("/update/{id}")
 	public void updateTypeWork(@PathVariable("id") Integer id, @RequestBody TypeWorkDTO typeWorkDTO) {
-		TypeWork typeWork = managementTypeWorkService.getById(id);
+		TypeWork typeWork = managementTypeWorkService.findById(id);
 		typeWork.setName(typeWorkDTO.getName());
 		managementTypeWorkService.save(typeWork);
 	}
