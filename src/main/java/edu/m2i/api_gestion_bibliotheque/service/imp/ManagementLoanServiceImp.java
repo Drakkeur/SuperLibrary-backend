@@ -1,5 +1,6 @@
 package edu.m2i.api_gestion_bibliotheque.service.imp;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,6 +82,8 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 			loan.setStatus(2);
 		} else if (status == "Terminé") {
 			loan.setStatus(0);
+			loan.setRealDateEnd(LocalDate.now());
+			managementWorkService.statusWork(managementWorkService.findById(id).getId());
 		}
 	}
 
