@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -42,14 +43,15 @@ public class User {
 
 	@OneToMany(mappedBy = "user", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
+	@JsonIgnore
 	private List<Loan> loans;
 
 	public User() {
 		super();
 	}
 
-	public User(Integer typeUser, String login, String password, String name, String firstname,
-			String address, String email, String phoneNumber, String comment) {
+	public User(Integer typeUser, String login, String password, String name, String firstname, String address,
+			String email, String phoneNumber, String comment) {
 		super();
 		this.typeUser = typeUser;
 		this.creationDate = LocalDate.now();
