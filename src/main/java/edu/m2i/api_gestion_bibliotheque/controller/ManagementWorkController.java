@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
+import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
@@ -81,9 +81,8 @@ public class ManagementWorkController {
 		work.setAvailability(request.getAvailability());
 		work.setTypeWork(typeWork);
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
-		typeWork.setCount(typeWork.getCount()+1);
+		typeWork.setCount(typeWork.getCount() + 1);
 		managementTypeWorkService.save(typeWork);
 	}
 
@@ -104,7 +103,6 @@ public class ManagementWorkController {
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(request.getAvailability());
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
 	}
