@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 import edu.m2i.api_gestion_bibliotheque.repository.LoanRepository;
-import edu.m2i.api_gestion_bibliotheque.service.GestionLoanService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
 
 @Service
-public class GestionLoanServiceImp implements GestionLoanService {
+public class ManagementLoanServiceImp implements ManagementLoanService {
 	@Autowired
 	LoanRepository loanRepository;
 
@@ -23,7 +23,7 @@ public class GestionLoanServiceImp implements GestionLoanService {
 		loanDTO.setTheoreticalDateEnd(loan.getTheoreticalDateEnd());
 		loanDTO.setRealDateEnd(loan.getRealDateEnd());
 		loanDTO.setStatus(loan.getStatus());
-		loanDTO.setOuvrage(loan.getOuvrage());
+		loanDTO.setWork(loan.getWork());
 		loanDTO.setUser(loan.getUser());
 		return loanDTO;
 	}
@@ -36,7 +36,7 @@ public class GestionLoanServiceImp implements GestionLoanService {
 		loanDTO.setTheoreticalDateEnd(loan.getTheoreticalDateEnd());
 		loanDTO.setRealDateEnd(loan.getRealDateEnd());
 		loanDTO.setStatus(loan.getStatus());
-		loanDTO.setOuvrage(loan.getOuvrage());
+		loanDTO.setWork(loan.getWork());
 		loanDTO.setUser(loan.getUser());
 		return loanDTO;
 	}
@@ -57,8 +57,8 @@ public class GestionLoanServiceImp implements GestionLoanService {
 	}
 
 	@Override
-	public List<Loan> getByOuvrage(Integer idOuvrage) {
-		return loanRepository.getOuvrageById(idOuvrage);
+	public List<Loan> getByWork(Integer idWork) {
+		return loanRepository.getOuvrageById(idWork);
 	}
 
 	@Override

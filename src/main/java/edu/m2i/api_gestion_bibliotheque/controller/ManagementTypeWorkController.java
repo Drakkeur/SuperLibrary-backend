@@ -19,52 +19,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.m2i.api_gestion_bibliotheque.dto.TypeOuvrageDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
-import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.dto.TypeWorkDTO;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-superlibrary/type-ouvrage")
-public class GestionTypeOuvrageController {
+@RequestMapping("/api-superlibrary/type-Work")
+public class ManagementTypeWorkController {
 
 	@Autowired
-	GestionTypeOuvrageService gestionTypeOuvrageService;
+	ManagementTypeWorkService managementTypeWorkService;
 
-	// Récupérer la liste complète des types d'ouvrage
-	@GetMapping("/typesouvrage")
-	public List<TypeOuvrage> getAllTypeOuvrage() {
-		return gestionTypeOuvrageService.findAll();
+	// Récupérer la liste complète des types d'Work
+	@GetMapping("/typesWork")
+	public List<TypeWork> getAllTypeWork() {
+		return managementTypeWorkService.findAll();
 	}
 	
 	@GetMapping("/{id}")
-	public TypeOuvrage getTypeOuvrage(@PathVariable("id") Integer id) {
-		return gestionTypeOuvrageService.findById(id);
+	public TypeWork getTypeWork(@PathVariable("id") Integer id) {
+		return managementTypeWorkService.findById(id);
 	}
 
-	// Ajouter un nouveau type d'ouvrage
+	// Ajouter un nouveau type d'Work
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public void addTypeOuvrage(@Valid @RequestBody TypeOuvrageDTO request) {
-		TypeOuvrage typeOuvrage = new TypeOuvrage();
-		typeOuvrage.setName(request.getName());
-		typeOuvrage.setCount(0);
-		gestionTypeOuvrageService.save(typeOuvrage);
+	public void addTypeWork(@Valid @RequestBody TypeWorkDTO request) {
+		TypeWork typeWork = new TypeWork();
+		typeWork.setName(request.getName());
+		typeWork.setCount(0);
+		managementTypeWorkService.save(typeWork);
 	}
 
-	// Supprimer un type d'ouvrage
+	// Supprimer un type d'Work
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
-	public void deleteTypeOuvrage(@PathVariable("id") Integer id) {
-		gestionTypeOuvrageService.delete(id);
+	public void deleteTypeWork(@PathVariable("id") Integer id) {
+		managementTypeWorkService.delete(id);
 	}
 
-	// Modifier un type d'ouvrage déjà présent dans la DB
+	// Modifier un type d'Work déjà présent dans la DB
 	@PutMapping("/update/{id}")
-	public void updateTypeOuvrage(@PathVariable("id") Integer id, @RequestBody TypeOuvrageDTO typeOuvrageDTO) {
-		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.findById(id);
-		typeOuvrage.setName(typeOuvrageDTO.getName());
-		gestionTypeOuvrageService.save(typeOuvrage);
+	public void updateTypeWork(@PathVariable("id") Integer id, @RequestBody TypeWorkDTO typeWorkDTO) {
+		TypeWork typeWork = managementTypeWorkService.findById(id);
+		typeWork.setName(typeWorkDTO.getName());
+		managementTypeWorkService.save(typeWork);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -2,7 +2,7 @@ package edu.m2i.api_gestion_bibliotheque.dto;
 
 import jakarta.validation.constraints.NotNull;
 
-public class TypeOuvrageDTO {
+public class TypeWorkDTO {
 
 	@NotNull(message = "Nom est obligatoire")
 	private String name;

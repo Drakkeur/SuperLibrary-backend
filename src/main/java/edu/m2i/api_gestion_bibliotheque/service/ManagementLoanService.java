@@ -5,7 +5,7 @@ import java.util.List;
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 
-public interface GestionLoanService {
+public interface ManagementLoanService {
 	LoanDTO save(Loan loan);
 
 	LoanDTO findById(Integer id);
@@ -16,7 +16,7 @@ public interface GestionLoanService {
 
 	List<Loan> getByUser(Integer idUser);
 
-	List<Loan> getByOuvrage(Integer idOuvrage);
+	List<Loan> getByWork(Integer idWork);
 
 	List<Loan> getByStatus(String status);
 

@@ -21,47 +21,50 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
-import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
-import edu.m2i.api_gestion_bibliotheque.service.GestionLoanService;
-import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
+import edu.m2i.api_gestion_bibliotheque.entity.Work;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api-superlibrary/loan")
-public class GestionLoanController {
+public class ManagementLoanController {
 
 	@Autowired
-	GestionLoanService gestionLoanService;
-	GestionOuvrageService gestionOuvrageService;
+
+	ManagementLoanService managementLoanService;
+
+	ManagementWorkService managementWorkService;
+
 
 	// Récupérer la liste complète des emprunts
 	@GetMapping("/loans")
 	public List<Loan> getAllLoan() {
-		return gestionLoanService.findAll();
+		return managementLoanService.findAll();
 	}
 
 	// Récupérer la liste des emprunts d'un utilisateur
 	@GetMapping("/loan-user/{id}")
 	public List<Loan> getLoanUser(@PathVariable("id") Integer id) {
-		return gestionLoanService.getByUser(id);
+		return managementLoanService.getByUser(id);
 	}
 
 	// Récupérer la liste des emprunts d'un ouvrage
 	@GetMapping("/loan-ouvrage/{id}")
 	public List<Loan> getLoanOuvrage(@PathVariable("id") Integer id) {
-		return gestionLoanService.getByOuvrage(id);
+		return managementLoanService.getByWork(id);
 	}
 
 	// Récupérer la liste des emprunts par status
 	@GetMapping("/loan-status")
 	public List<Loan> getLoanStatus(@RequestBody String status) {
-		return gestionLoanService.getByStatus(status);
+		return managementLoanService.getByStatus(status);
 	}
 
 	// Récupérer un emprunt par ID
 	@GetMapping("/loan/{id}")
 	public LoanDTO getLoan(@PathVariable("id") Integer id) {
-		return gestionLoanService.findById(id);
+		return managementLoanService.findById(id);
 	}
 
 	// Faire une réservation
@@ -72,34 +75,36 @@ public class GestionLoanController {
 		loan.setDateStart();
 		loan.setTheoreticalDateEnd();
 		loan.setStatus(1);
-		loan.setOuvrage(request.getOuvrage());
+		loan.setWork(request.getWork());
 		loan.setUser(request.getUser());
-		gestionLoanService.save(loan);
+		managementLoanService.save(loan);
 	}
 
 	// Valider une réservation
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
-		gestionLoanService.changeStatusLoan(id, "En cours");
-		LoanDTO loanDTO = gestionLoanService.findById(id);
-		Ouvrage ouvrage = loanDTO.getOuvrage();
-		gestionOuvrageService.statusOuvrage(ouvrage.getId());
+
+		managementLoanService.changeStatusLoan(id, "En cours");
+		LoanDTO loanDTO = managementLoanService.findById(id);
+		Work work = loanDTO.getWork();
+		managementWorkService.statusWork(work.getId());
+
 	}
 
 	// Valider un retour d'emprunt
 	@PutMapping("/validate-return/{id}")
 	public void validateReturn(@PathVariable("id") Integer id) {
-		gestionLoanService.changeStatusLoan(id, "Terminé");
-		LoanDTO loanDTO = gestionLoanService.findById(id);
-		Ouvrage ouvrage = loanDTO.getOuvrage();
-		gestionOuvrageService.statusOuvrage(ouvrage.getId());
+		managementLoanService.changeStatusLoan(id, "Terminé");
+		LoanDTO loanDTO = managementLoanService.findById(id);
+		Work work = loanDTO.getWork();
+		managementWorkService.statusWork(work.getId());
 	}
 
 	// Supprimer un emprunt
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteLoan(@PathVariable("id") Integer id) {
-		gestionLoanService.delete(id);
+		managementLoanService.delete(id);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

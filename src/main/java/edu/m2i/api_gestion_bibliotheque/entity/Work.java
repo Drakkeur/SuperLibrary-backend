@@ -19,9 +19,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-@Entity(name = "Ouvrage")
+
+@Entity(name = "Work")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-public class Ouvrage {
+public class Work {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false)
@@ -41,20 +42,20 @@ public class Ouvrage {
 	private Boolean availability;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_typeOuvrage", nullable = false)
+	@JoinColumn(name = "id_typeWork", nullable = false)
 	@JsonIgnoreProperties
-	private TypeOuvrage typeOuvrage;
+	private TypeWork typeWork;
 
-	@OneToMany(mappedBy = "ouvrage", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@OneToMany(mappedBy = "work", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
 	private List<Loan> loans;
 
-	public Ouvrage() {
+	public Work() {
 		super();
 	}
 
-	public Ouvrage(String cote, String title, String mainAuthor, String otherAuthor, String genre, String editor,
-			LocalDate publishedDate, String comment, Boolean availability, TypeOuvrage typeOuvrage) {
+	public Work(String cote, String title, String mainAuthor, String otherAuthor, String genre, String editor,
+			LocalDate publishedDate, String comment, Boolean availability, TypeWork typeWork) {
 		super();
 		this.cote = cote;
 		this.title = title;
@@ -65,7 +66,7 @@ public class Ouvrage {
 		this.publishedDate = publishedDate;
 		this.comment = comment;
 		this.availability = availability;
-		this.typeOuvrage = typeOuvrage;
+		this.typeWork = typeWork;
 	}
 
 	public String getCote() {
@@ -140,12 +141,12 @@ public class Ouvrage {
 		this.availability = availability;
 	}
 
-	public TypeOuvrage getTypeOuvrage() {
-		return typeOuvrage;
+	public TypeWork getTypeWork() {
+		return typeWork;
 	}
 
-	public void setTypeOuvrage(TypeOuvrage typeOuvrage) {
-		this.typeOuvrage = typeOuvrage;
+	public void setTypeWork(TypeWork typeWork) {
+		this.typeWork = typeWork;
 	}
 
 	public List<Loan> getLoans() {
@@ -156,7 +157,7 @@ public class Ouvrage {
 		if (this.loans == null) {
 			this.loans = new ArrayList<Loan>();
 		}
-		loan.setOuvrage(this);
+		loan.setWork(this);
 		this.loans.add(loan);
 	}
 
@@ -167,7 +168,7 @@ public class Ouvrage {
 	@Override
 	public int hashCode() {
 		return Objects.hash(availability, comment, cote, editor, genre, id, mainAuthor, otherAuthor, publishedDate,
-				title, typeOuvrage);
+				title, typeWork);
 	}
 
 	@Override
@@ -178,21 +179,21 @@ public class Ouvrage {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ouvrage other = (Ouvrage) obj;
+		Work other = (Work) obj;
 		return Objects.equals(availability, other.availability) && Objects.equals(comment, other.comment)
 				&& Objects.equals(cote, other.cote) && Objects.equals(editor, other.editor)
 				&& Objects.equals(genre, other.genre) && Objects.equals(id, other.id)
 				&& Objects.equals(mainAuthor, other.mainAuthor) && Objects.equals(otherAuthor, other.otherAuthor)
 				&& Objects.equals(publishedDate, other.publishedDate) && Objects.equals(title, other.title)
-				&& Objects.equals(typeOuvrage, other.typeOuvrage);
+				&& Objects.equals(typeWork, other.typeWork);
 	}
 
 	@Override
 	public String toString() {
-		return "Ouvrage [id=" + id + ", cote=" + cote + ", title=" + title + ", mainAuthor=" + mainAuthor
+		return "Work [id=" + id + ", cote=" + cote + ", title=" + title + ", mainAuthor=" + mainAuthor
 				+ ", otherAuthor=" + otherAuthor + ", genre=" + genre + ", editor=" + editor + ", publishedDate="
-				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeOuvrage="
-				+ typeOuvrage + "]";
+				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork="
+				+ typeWork + "]";
 	}
 
 }
