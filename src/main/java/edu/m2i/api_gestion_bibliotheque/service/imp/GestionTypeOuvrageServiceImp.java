@@ -44,4 +44,10 @@ public class GestionTypeOuvrageServiceImp implements GestionTypeOuvrageService {
 		return typeOuvrageRepository.findByNameContaining(name);
 	}
 
+	// Récupérer un type d'ouvrage à partir de l'ID
+	@Override
+	public TypeOuvrage getById(Integer id) {
+		return typeOuvrageRepository.getReferenceById(id);
+	}
+
 }
