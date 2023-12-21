@@ -2,8 +2,6 @@ package edu.m2i.api_gestion_bibliotheque.dto;
 
 import java.time.LocalDate;
 
-import edu.m2i.api_gestion_bibliotheque.entity.User;
-import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import jakarta.validation.constraints.NotNull;
 
 public class LoanDTO {
@@ -17,10 +15,10 @@ public class LoanDTO {
 	private Integer status;
 
 	@NotNull(message = "ID Ouvrage obligatoire")
-	private Work work;
+	private Integer idWork;
 
 	@NotNull(message = "ID Abonné obligatoire")
-	private User user;
+	private Integer idUser;
 
 	public LocalDate getDateStart() {
 		return dateStart;
@@ -54,20 +52,20 @@ public class LoanDTO {
 		this.status = status;
 	}
 
-	public Work getWork() {
-		return work;
+	public Integer getIdWork() {
+		return idWork;
 	}
 
-	public void setWork(Work work) {
-		this.work = work;
+	public void setIdWork(Integer idWork) {
+		this.idWork = idWork;
 	}
 
-	public User getUser() {
-		return user;
+	public Integer getIdUser() {
+		return idUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setIdUser(Integer idUser) {
+		this.idUser = idUser;
 	}
 
 }

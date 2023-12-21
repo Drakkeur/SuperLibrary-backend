@@ -9,11 +9,17 @@ import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 import edu.m2i.api_gestion_bibliotheque.repository.LoanRepository;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementUserService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 
 @Service
 public class ManagementLoanServiceImp implements ManagementLoanService {
 	@Autowired
 	LoanRepository loanRepository;
+	@Autowired
+	ManagementUserService managementUserService;
+	@Autowired
+	ManagementWorkService managementWorkService;
 
 	@Override
 	public LoanDTO save(Loan loan) {
@@ -23,8 +29,8 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 		loanDTO.setTheoreticalDateEnd(loan.getTheoreticalDateEnd());
 		loanDTO.setRealDateEnd(loan.getRealDateEnd());
 		loanDTO.setStatus(loan.getStatus());
-		loanDTO.setWork(loan.getWork());
-		loanDTO.setUser(loan.getUser());
+		loanDTO.setIdWork(loan.getWork().getId());
+		loanDTO.setIdUser(loan.getUser().getId());
 		return loanDTO;
 	}
 
@@ -36,8 +42,8 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 		loanDTO.setTheoreticalDateEnd(loan.getTheoreticalDateEnd());
 		loanDTO.setRealDateEnd(loan.getRealDateEnd());
 		loanDTO.setStatus(loan.getStatus());
-		loanDTO.setWork(loan.getWork());
-		loanDTO.setUser(loan.getUser());
+		loanDTO.setIdWork(loan.getWork().getId());
+		loanDTO.setIdUser(loan.getUser().getId());
 		return loanDTO;
 	}
 
@@ -52,17 +58,17 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 	}
 
 	@Override
-	public List<Loan> getByUser(Integer idUser) {
-		return loanRepository.getUserById(idUser);
+	public List<Loan> getByUser(Integer id) {
+		return loanRepository.findByUser(managementUserService.findById(id));
 	}
 
 	@Override
-	public List<Loan> getByWork(Integer idWork) {
-		return loanRepository.getWorkById(idWork);
+	public List<Loan> getByWork(Integer id) {
+		return loanRepository.findByWork(managementWorkService.findById(id));
 	}
 
 	@Override
-	public List<Loan> getByStatus(String status) {
+	public List<Loan> getByStatus(Integer status) {
 		return loanRepository.getByStatus(status);
 	}
 
