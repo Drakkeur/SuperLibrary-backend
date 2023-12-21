@@ -22,20 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
-import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementUserService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api-user")
-public class GestionUserController {
+public class ManagementUserController {
 	
 	@Autowired
-	GestionUserService gestionUserService;
+	ManagementUserService managementUserService;
 	
 	// Récupérer la liste de users dans la BDD
 	@GetMapping("users")
 	public List<User> getUserList(){
-		return gestionUserService.findAll();
+		return managementUserService.findAll();
 	}
 	
 	// Ajouter un user à la BDD
@@ -52,20 +52,20 @@ public class GestionUserController {
 		user.setPassword(request.getPassword());
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
-		gestionUserService.save(user);;
+		managementUserService.save(user);;
 	}
 	
 	// Supprimer un client à partir de son ID
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") Integer id) {
-		gestionUserService.delete(id);
+		managementUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	// Mise à jour des informations d'un user
 	@PutMapping("update")
 	public void updateUser(@RequestBody User user) {
-		gestionUserService.save(user);
+		managementUserService.save(user);
 	}
 	
 	// On peut rajouter différentes manières d'update un client avec des RequestParam dans l'url plus tard

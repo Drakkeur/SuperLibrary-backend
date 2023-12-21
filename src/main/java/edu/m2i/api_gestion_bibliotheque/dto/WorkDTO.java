@@ -2,11 +2,11 @@ package edu.m2i.api_gestion_bibliotheque.dto;
 
 import java.time.LocalDate;
 
-import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class OuvrageDTO {
+public class WorkDTO {
 
 	private String cote;
 
@@ -37,14 +37,14 @@ public class OuvrageDTO {
 	private Boolean availability;
 
 	@NotNull(message = "Type de l'Ouvrage obligatoire")
-	private TypeOuvrage typeOuvrage;
+	private TypeWork typeWork;
 
-	public TypeOuvrage getTypeOuvrage() {
-		return typeOuvrage;
+	public TypeWork getTypeWork() {
+		return typeWork;
 	}
 
-	public void setTypeOuvrage(TypeOuvrage typeOuvrage) {
-		this.typeOuvrage = typeOuvrage;
+	public void setTypeWork(TypeWork typeWork) {
+		this.typeWork = typeWork;
 	}
 
 	public String getCote() {

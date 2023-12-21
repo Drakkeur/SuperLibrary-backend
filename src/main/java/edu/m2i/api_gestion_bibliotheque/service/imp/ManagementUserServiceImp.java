@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
 import edu.m2i.api_gestion_bibliotheque.repository.UserRepository;
-import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementUserService;
 
 @Service
-public class GestionUserServiceImp implements GestionUserService {
+public class ManagementUserServiceImp implements ManagementUserService {
 
 	@Autowired
 	UserRepository userRepository;

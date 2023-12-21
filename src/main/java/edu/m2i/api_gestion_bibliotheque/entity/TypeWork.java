@@ -12,8 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
-@Entity(name = "TypeOuvrage")
-public class TypeOuvrage {
+@Entity(name = "TypeWork")
+public class TypeWork {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id", updatable = false)
@@ -21,15 +21,15 @@ public class TypeOuvrage {
 	@Column(nullable = false)
 	private String name;
 
-	@OneToMany(mappedBy = "typeOuvrage", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+	@OneToMany(mappedBy = "typeWork", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
-	private List<Ouvrage> ouvrages;
+	private List<Work> works;
 
-	public TypeOuvrage() {
+	public TypeWork() {
 		super();
 	}
 
-	public TypeOuvrage(String name) {
+	public TypeWork(String name) {
 		super();
 		this.name = name;
 	}
@@ -46,16 +46,16 @@ public class TypeOuvrage {
 		return id;
 	}
 
-	public List<Ouvrage> getOuvrages() {
-		return ouvrages;
+	public List<Work> getWorks() {
+		return works;
 	}
 
-	public void addOuvrage(Ouvrage ouvrage) {
-		if (this.ouvrages == null) {
-			this.ouvrages = new ArrayList<Ouvrage>();
+	public void addWork(Work work) {
+		if (this.works == null) {
+			this.works = new ArrayList<Work>();
 		}
-		ouvrage.setTypeOuvrage(this);
-		this.ouvrages.add(ouvrage);
+		work.setTypeWork(this);
+		this.works.add(work);
 	}
 
 	@Override
@@ -71,13 +71,13 @@ public class TypeOuvrage {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		TypeOuvrage other = (TypeOuvrage) obj;
+		TypeWork other = (TypeWork) obj;
 		return Objects.equals(id, other.id) && Objects.equals(name, other.name);
 	}
 
 	@Override
 	public String toString() {
-		return "TypeOuvrage [id=" + id + ", name=" + name + "]";
+		return "TypeWork [id=" + id + ", name=" + name + "]";
 	}
 
 }

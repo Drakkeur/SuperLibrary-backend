@@ -18,43 +18,43 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
-import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
+import edu.m2i.api_gestion_bibliotheque.entity.Work;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api-superlibrary/ouvrages")
-public class GestionOuvrageController {
+public class ManagementWorkController {
 
 	@Autowired
-	GestionOuvrageService gestionOuvrageService;
+	ManagementWorkService gestionOuvrageService;
 
 	@GetMapping("/all")
-	public List<Ouvrage> getAllOuvrages() {
+	public List<Work> getAllOuvrages() {
 		return gestionOuvrageService.findAll();
 	}
 
 	@GetMapping("/{id}")
-	public Ouvrage getOuvrage(@PathVariable("id") Integer id) {
+	public Work getOuvrage(@PathVariable("id") Integer id) {
 		return gestionOuvrageService.findById(id);
 	}
 	
 	@GetMapping("/{filter}")
-	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter){
-		return gestionOuvrageService.getOuvrage(filter);
+	public List<Work> getOuvrage(@PathVariable("filter") String filter){
+		return gestionOuvrageService.getWork(filter);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
-	public void deleteOuvrage(@PathVariable("id") Integer id) {
+	public void deleteWork(@PathVariable("id") Integer id) {
 		gestionOuvrageService.delete(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public void addOuvrages(@Valid @RequestBody OuvrageDTO request) {
-		Ouvrage ouvrage = new Ouvrage();
+	public void addOuvrages(@Valid @RequestBody WorkDTO request) {
+		Work ouvrage = new Work();
 		ouvrage.setCote(request.getCote());
 		ouvrage.setTitle(request.getTitle());
 		ouvrage.setMainAuthor(request.getMainAuthor());
@@ -64,7 +64,7 @@ public class GestionOuvrageController {
 		ouvrage.setPublishedDate(request.getPublishedDate());
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
+		ouvrage.setTypeWork(request.getTypeWork());
 		gestionOuvrageService.save(ouvrage);
 	}
 
