@@ -55,8 +55,8 @@ public class GestionTypeOuvrageController {
 
 	// Modifier un type d'ouvrage déjà présent dans la DB
 	@PutMapping("/update/{id}")
-	public void updateTypeOuvrage(@RequestBody TypeOuvrageDTO typeOuvrageDTO) {
-		TypeOuvrage typeOuvrage = new TypeOuvrage();
+	public void updateTypeOuvrage(@PathVariable("id") Integer id, @RequestBody TypeOuvrageDTO typeOuvrageDTO) {
+		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.getById(id);
 		typeOuvrage.setName(typeOuvrageDTO.getName());
 		gestionTypeOuvrageService.save(typeOuvrage);
 	}
