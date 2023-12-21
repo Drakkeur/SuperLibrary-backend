@@ -86,11 +86,11 @@ public class ManagementWorkController {
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(true);
-		work.setTypeWork(typeWork);
+		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
-		typeWork.setCount(typeWork.getCount()+1);
+		typeWork.setCount(typeWork.getCount() + 1);
 		managementTypeWorkService.save(typeWork);
-		genreWork.setCount(genreWork.getCount()+1);
+		genreWork.setCount(genreWork.getCount() + 1);
 		managementGenreWorkService.save(genreWork);
 	}
 

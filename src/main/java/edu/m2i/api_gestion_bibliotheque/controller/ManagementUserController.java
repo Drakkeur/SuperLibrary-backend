@@ -51,6 +51,7 @@ public class ManagementUserController {
 		user.setPassword(request.getPassword());
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
+		user.setCreationDate();
 		managementUserService.save(user);
 	}
 
@@ -60,7 +61,7 @@ public class ManagementUserController {
 		managementUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
+
 	// Mise à jour des informations d'un user
 	@PutMapping("update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody UserDTO request) {

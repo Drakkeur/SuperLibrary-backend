@@ -77,6 +77,10 @@ public class User {
 		return creationDate;
 	}
 
+	public void setCreationDate() {
+		this.creationDate = LocalDate.now();
+	}
+
 	public String getLogin() {
 		return login;
 	}
