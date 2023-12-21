@@ -33,13 +33,13 @@ public class ManagementUserController {
 	ManagementUserService managementUserService;
 
 	// Récupérer la liste de users dans la BDD
-	@GetMapping("users")
+	@GetMapping("/all")
 	public List<User> getUserList() {
 		return managementUserService.findAll();
 	}
 
 	// Ajouter un user à la BDD
-	@PostMapping("add")
+	@PostMapping("/add")
 	public void addUser(@Valid @RequestBody UserDTO request) {
 		User user = new User();
 		user.setAddress(request.getAddress());
@@ -56,7 +56,7 @@ public class ManagementUserController {
 	}
 
 	// Supprimer un client à partir de son ID
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") Integer id) {
 		managementUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -69,7 +69,7 @@ public class ManagementUserController {
 	}
 
 	// Mise à jour des informations d'un user
-	@PutMapping("update/{id}")
+	@PutMapping("/update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody User request) {
 		User user = managementUserService.findById(id);
 		user.setAddress(request.getAddress());

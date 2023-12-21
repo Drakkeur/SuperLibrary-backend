@@ -58,7 +58,7 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 
 	@Override
 	public List<Loan> getByWork(Integer idWork) {
-		return loanRepository.getOuvrageById(idWork);
+		return loanRepository.getWorkById(idWork);
 	}
 
 	@Override
