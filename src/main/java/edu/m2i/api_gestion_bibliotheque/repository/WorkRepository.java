@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import edu.m2i.api_gestion_bibliotheque.entity.Work;
 
 @Repository
-public interface WorkRepository extends JpaRepository<Work, Integer> {
-
-	List<Work> findByTitleOrMainAuthorOrOtherAuthorContaining(String filter1, String filter2, String filter3);
+public interface WorkRepository extends JpaRepository<Work, Integer>{
+	
+	List<Work> findByTitleContaining(String filter);
+	List<Work> findByMainAuthorContaining(String filter);
 
 }

@@ -15,30 +15,34 @@ public class ManagementTypeWorkServiceImp implements ManagementTypeWorkService {
 	@Autowired
 	TypeWorkRepository typeWorkRepository;
 
-	// Lister tous les types d'ouvrages
+	// Lister tous les types d'works
 	@Override
 	public List<TypeWork> findAll() {
 		return typeWorkRepository.findAll();
 	}
 
-	// Sauvegarder un type d'ouvrage
+	// Sauvegarder un type d'work
 	@Override
-	public TypeWorkDTO save(TypeWork typeOuvrage) {
-		typeOuvrage = typeWorkRepository.save(typeOuvrage);
-		TypeWorkDTO typeOuvrageDTO = new TypeWorkDTO();
-		typeOuvrageDTO.setName(typeOuvrage.getName());
-		return typeOuvrageDTO;
+	public TypeWorkDTO save(TypeWork typeWork) {
+		typeWork = typeWorkRepository.save(typeWork);
+		TypeWorkDTO typeWorkDTO = new TypeWorkDTO();
+		typeWorkDTO.setName(typeWork.getName());
+		return typeWorkDTO;
 	}
 
-	// Supprimer un type d'ouvrage
+	// Supprimer un type d'work
 	@Override
 	public void delete(Integer id) {
 		typeWorkRepository.deleteById(id);
 	}
+	
+	public List<TypeWork> findByName(String name) {
+		return typeWorkRepository.findByNameContaining(name);
+	}
 
-	// Récupérer un type d'ouvrage à partir de l'ID
+	// Récupérer un type d'work à partir de l'ID
 	@Override
-	public TypeWork getById(Integer id) {
+	public TypeWork findById(Integer id) {
 		return typeWorkRepository.getReferenceById(id);
 	}
 

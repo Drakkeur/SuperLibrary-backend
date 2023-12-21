@@ -44,7 +44,6 @@ public class ManagementUserController {
 		User user = new User();
 		user.setAddress(request.getAddress());
 		user.setComment(request.getComment());
-		user.setCreationDate();
 		user.setEmail(request.getEmail());
 		user.setFirstname(request.getFirstname());
 		user.setLogin(request.getLogin());
@@ -61,20 +60,13 @@ public class ManagementUserController {
 		managementUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-
-	// Récupérer un utilisateur par son ID
-	@GetMapping("/user/{id}")
-	public UserDTO getByIdUser(@PathVariable("id") Integer id) {
-		return managementUserService.findByIdDTO(id);
-	}
-
+	
 	// Mise à jour des informations d'un user
-	@PutMapping("/update/{id}")
-	public void updateUser(@PathVariable("id") Integer id, @RequestBody User request) {
+	@PutMapping("update/{id}")
+	public void updateUser(@PathVariable("id") Integer id, @RequestBody UserDTO request) {
 		User user = managementUserService.findById(id);
 		user.setAddress(request.getAddress());
 		user.setComment(request.getComment());
-		user.setCreationDate();
 		user.setEmail(request.getEmail());
 		user.setFirstname(request.getFirstname());
 		user.setLogin(request.getLogin());
@@ -83,7 +75,12 @@ public class ManagementUserController {
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
 		managementUserService.save(user);
-		;
+	}
+
+	// Récupérer un utilisateur par son ID
+	@GetMapping("/user/{id}")
+	public UserDTO getByIdUser(@PathVariable("id") Integer id) {
+		return managementUserService.findByIdDTO(id);
 	}
 
 	// On peut rajouter différentes manières d'update un client avec des

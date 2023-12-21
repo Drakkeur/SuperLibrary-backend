@@ -24,6 +24,7 @@ public class User {
 	@Column(name = "id", updatable = false)
 	private Integer id;
 	private Integer typeUser;
+	@Column(updatable = false)
 	LocalDate creationDate;
 	@Column(nullable = false)
 	private String login;
@@ -47,11 +48,11 @@ public class User {
 		super();
 	}
 
-	public User(Integer typeUser, LocalDate creationDate, String login, String password, String name, String firstname,
+	public User(Integer typeUser, String login, String password, String name, String firstname,
 			String address, String email, String phoneNumber, String comment) {
 		super();
 		this.typeUser = typeUser;
-		this.creationDate = creationDate;
+		this.creationDate = LocalDate.now();
 		this.login = login;
 		this.password = password;
 		this.name = name;
@@ -72,10 +73,6 @@ public class User {
 
 	public LocalDate getCreationDate() {
 		return creationDate;
-	}
-
-	public void setCreationDate() {
-		this.creationDate = LocalDate.now();
 	}
 
 	public String getLogin() {

@@ -14,8 +14,6 @@ public class UserDTO {
 	@Digits(integer = 1, fraction = 0, message = "La valeur doit être 0 pour un bibliothécaire ou 1 pour un abonné")
 	private Integer typeUser;
 
-	private LocalDate creationDate;
-
 	@NotNull(message = "Login obligatoire")
 	@Size(min = 2, max = 30, message = "Nombre de caratères compris entre 2 et 30")
 	private String login;
@@ -44,16 +42,17 @@ public class UserDTO {
 
 	@Size(min = 5, max = 150, message = "Nombre de caratères compris entre 5 et 150")
 	private String comment;
+	
+	private LocalDate creationDate;
 
 	public UserDTO() {
 
 	}
 
-	public UserDTO(Integer typeUser, LocalDate creationDate, String login, String password, String name,
+	public UserDTO(Integer typeUser, String login, String password, String name,
 			String firstname, String address, String email, String phoneNumber, String comment) {
 		super();
 		this.typeUser = typeUser;
-		this.creationDate = creationDate;
 		this.login = login;
 		this.password = password;
 		this.name = name;
@@ -70,14 +69,6 @@ public class UserDTO {
 
 	public void setTypeUser(Integer typeUser) {
 		this.typeUser = typeUser;
-	}
-
-	public LocalDate getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(LocalDate creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public String getLogin() {
@@ -142,6 +133,14 @@ public class UserDTO {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public LocalDate getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(LocalDate creationDate) {
+		this.creationDate = creationDate;
 	}
 
 }

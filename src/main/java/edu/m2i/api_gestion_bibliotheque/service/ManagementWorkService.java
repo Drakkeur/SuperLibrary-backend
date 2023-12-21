@@ -9,15 +9,18 @@ public interface ManagementWorkService {
 
 	List<Work> findAll();
 
-	List<Work> getWork(String filter);
+	public List<Work> getWorkByTitle(String filter);
+	
+	public List<Work> getWorkByAuthor(String filter);
 
 	Work findById(Integer id);
 
-	WorkDTO findByIdDTO(Integer id);
+	public WorkDTO findByIdDTO(Integer id);
 
-	WorkDTO save(Work work);
+	public WorkDTO save(Work work);
+
+
+	public void statusWork(Integer id);
 
 	void delete(Integer id);
-
-	void statusWork(Integer id);
 }

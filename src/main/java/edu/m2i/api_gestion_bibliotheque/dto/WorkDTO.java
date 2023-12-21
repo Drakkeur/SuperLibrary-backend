@@ -35,7 +35,7 @@ public class WorkDTO {
 
 	private Boolean availability;
 
-	@NotNull(message = "ID du type de l'Ouvrage obligatoire")
+	@NotNull(message = "Type de l'ouvrage obligatoire")
 	private Integer idTypeWork;
 
 	public Integer getIdTypeWork() {

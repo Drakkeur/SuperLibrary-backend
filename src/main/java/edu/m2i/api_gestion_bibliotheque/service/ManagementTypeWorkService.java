@@ -8,11 +8,12 @@ import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
 public interface ManagementTypeWorkService {
 
 	List<TypeWork> findAll();
+	
+	public TypeWork findById(Integer id);
+	
+	public List<TypeWork> findByName(String name);
 
 	TypeWorkDTO save(TypeWork typeWork);
 
 	void delete(Integer id);
-
-	TypeWork getById(Integer id);
-
 }
