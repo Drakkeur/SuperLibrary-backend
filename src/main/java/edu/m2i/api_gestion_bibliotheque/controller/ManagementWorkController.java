@@ -66,7 +66,7 @@ public class ManagementWorkController {
 		TypeWork typeWork = work.getTypeWork();
 		typeWork.setCount(typeWork.getCount() - 1);
 		managementTypeWorkService.save(typeWork);
-		GenreWork genreWork = work.getGenre();
+		GenreWork genreWork = work.getGenreWork();
 		genreWork.setCount(genreWork.getCount() - 1);
 		managementGenreWorkService.save(genreWork);
 		managementWorkService.delete(id);
@@ -76,18 +76,18 @@ public class ManagementWorkController {
 	@PostMapping("/add")
 	public void addWorks(@Valid @RequestBody WorkDTO request) {
 		Work work = new Work();
-		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
-		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
-		work.setGenre(genreWork);
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(true);
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
+		work.setGenreWork(managementGenreWorkService.findById(request.getIdGenreWork()));
 		managementWorkService.save(work);
+		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
+		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		typeWork.setCount(typeWork.getCount() + 1);
 		managementTypeWorkService.save(typeWork);
 		genreWork.setCount(genreWork.getCount() + 1);
@@ -105,12 +105,12 @@ public class ManagementWorkController {
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
-		work.setGenre(managementGenreWorkService.findById(request.getIdGenreWork()));
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(request.getAvailability());
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
+		work.setGenreWork(managementGenreWorkService.findById(request.getIdGenreWork()));
 		managementWorkService.save(work);
 	}
 

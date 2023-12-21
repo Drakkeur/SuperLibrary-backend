@@ -36,7 +36,7 @@ public class ManagementGenreWorkController {
 	public List<GenreWork> getAllGenreWork() {
 		return managementGenreWorkService.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	public GenreWork getGenreWork(@PathVariable("id") Integer id) {
 		return managementGenreWorkService.findById(id);

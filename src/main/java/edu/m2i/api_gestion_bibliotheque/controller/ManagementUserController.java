@@ -32,13 +32,13 @@ public class ManagementUserController {
 	@Autowired
 	ManagementUserService managementUserService;
 
-	// Récupérer la liste de users dans la BDD
+	// Récupérer la liste de users dans la DB
 	@GetMapping("/all")
 	public List<User> getUserList() {
 		return managementUserService.findAll();
 	}
 
-	// Ajouter un user à la BDD
+	// Ajouter un user à la DB
 	@PostMapping("/add")
 	public void addUser(@Valid @RequestBody UserDTO request) {
 		User user = new User();
