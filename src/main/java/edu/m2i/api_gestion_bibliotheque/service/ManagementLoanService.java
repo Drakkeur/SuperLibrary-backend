@@ -18,7 +18,7 @@ public interface ManagementLoanService {
 
 	List<Loan> getByWork(Integer idWork);
 
-	List<Loan> getByStatus(String status);
+	List<Loan> getByStatus(Integer status);
 
 	void changeStatusLoan(Integer id, String status);
 

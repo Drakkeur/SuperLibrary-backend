@@ -43,15 +43,14 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 
 	@Override
 	public Work findById(Integer id) {
-		Work work = workRepository.getReferenceById(id);
-		return work;
+		return workRepository.getReferenceById(id);
 	}
 
 	@Override
 	public List<Work> getWorkByTitle(String filter) {
 		return workRepository.findByTitleContaining(filter);
 	}
-	
+
 	@Override
 	public List<Work> getWorkByAuthor(String filter) {
 		return workRepository.findByMainAuthorContaining(filter);
@@ -79,7 +78,6 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 	public void delete(Integer id) {
 		workRepository.deleteById(id);
 	}
-
 
 	@Override
 	public void statusWork(Integer id) {
