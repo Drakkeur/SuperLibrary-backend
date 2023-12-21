@@ -32,7 +32,7 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 		workDTO.setTitle(work.getTitle());
 		workDTO.setMainAuthor(work.getMainAuthor());
 		workDTO.setOtherAuthor(work.getOtherAuthor());
-		workDTO.setGenreWork(genreWork.getId());
+		workDTO.setIdGenreWork(genreWork.getId());
 		workDTO.setEditor(work.getEditor());
 		workDTO.setPublishedDate(work.getPublishedDate());
 		workDTO.setComment(work.getComment());
@@ -65,7 +65,7 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 		workDTO.setTitle(work.getTitle());
 		workDTO.setMainAuthor(work.getMainAuthor());
 		workDTO.setOtherAuthor(work.getOtherAuthor());
-		workDTO.setGenreWork(genreWork.getId());
+		workDTO.setIdGenreWork(genreWork.getId());
 		workDTO.setEditor(work.getEditor());
 		workDTO.setPublishedDate(work.getPublishedDate());
 		workDTO.setComment(work.getComment());

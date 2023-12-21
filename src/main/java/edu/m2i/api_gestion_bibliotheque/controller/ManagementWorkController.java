@@ -77,7 +77,7 @@ public class ManagementWorkController {
 	public void addWorks(@Valid @RequestBody WorkDTO request) {
 		Work work = new Work();
 		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
-		GenreWork genreWork = managementGenreWorkService.findById(request.getGenreWork());
+		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
@@ -105,7 +105,7 @@ public class ManagementWorkController {
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
-		work.setGenre(managementGenreWorkService.findById(request.getGenreWork()));
+		work.setGenre(managementGenreWorkService.findById(request.getIdGenreWork()));
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());

@@ -43,11 +43,11 @@ public class WorkDTO {
 		this.idTypeWork = idTypeWork;
 	}
 	
-	public Integer getGenreWork() {
+	public Integer getIdGenreWork() {
 		return idGenreWork;
 	}
 
-	public void setGenreWork(Integer idGenreWork) {
+	public void setIdGenreWork(Integer idGenreWork) {
 		this.idGenreWork = idGenreWork;
 	}
 
