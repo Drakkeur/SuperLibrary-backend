@@ -5,7 +5,7 @@ import java.util.List;
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
 
-public interface GestionUserService {
+public interface ManagementUserService {
 
 	UserDTO save(User user);
 

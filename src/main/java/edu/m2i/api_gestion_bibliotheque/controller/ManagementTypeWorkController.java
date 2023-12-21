@@ -19,46 +19,46 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.m2i.api_gestion_bibliotheque.dto.TypeOuvrageDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
-import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.dto.TypeWorkDTO;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api-superlibrary/type-ouvrage")
-public class GestionTypeOuvrageController {
+public class ManagementTypeWorkController {
 
 	@Autowired
-	GestionTypeOuvrageService gestionTypeOuvrageService;
+	ManagementTypeWorkService managementTypeWorkService;
 
 	// Récupérer la liste complète des types d'ouvrage
 	@GetMapping("/typesouvrage")
-	public List<TypeOuvrage> getAllTypeOuvrage() {
-		return gestionTypeOuvrageService.findAll();
+	public List<TypeWork> getAllTypeWork() {
+		return managementTypeWorkService.findAll();
 	}
 
 	// Ajouter un nouveau type d'ouvrage
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public void addTypeOuvrage(@Valid @RequestBody TypeOuvrageDTO request) {
-		TypeOuvrage typeOuvrage = new TypeOuvrage();
-		typeOuvrage.setName(request.getName());
-		gestionTypeOuvrageService.save(typeOuvrage);
+	public void addTypeOuvrage(@Valid @RequestBody TypeWorkDTO request) {
+		TypeWork typeWork = new TypeWork();
+		typeWork.setName(request.getName());
+		managementTypeWorkService.save(typeWork);
 	}
 
 	// Supprimer un type d'ouvrage
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteTypeOuvrage(@PathVariable("id") Integer id) {
-		gestionTypeOuvrageService.delete(id);
+		managementTypeWorkService.delete(id);
 	}
 
 	// Modifier un type d'ouvrage déjà présent dans la DB
 	@PutMapping("/update/{id}")
-	public void updateTypeOuvrage(@PathVariable("id") Integer id, @RequestBody TypeOuvrageDTO typeOuvrageDTO) {
-		TypeOuvrage typeOuvrage = gestionTypeOuvrageService.getById(id);
-		typeOuvrage.setName(typeOuvrageDTO.getName());
-		gestionTypeOuvrageService.save(typeOuvrage);
+	public void updateTypeWork(@PathVariable("id") Integer id, @RequestBody TypeWorkDTO typeWorkDTO) {
+		TypeWork typeWork = managementTypeWorkService.getById(id);
+		typeWork.setName(typeWorkDTO.getName());
+		managementTypeWorkService.save(typeWork);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

@@ -22,20 +22,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.UserDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.User;
-import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementUserService;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api-superlibrary/user")
-public class GestionUserController {
+public class ManagementUserController {
 
 	@Autowired
-	GestionUserService gestionUserService;
+	ManagementUserService managementUserService;
 
 	// Récupérer la liste de users dans la BDD
 	@GetMapping("users")
 	public List<User> getUserList() {
-		return gestionUserService.findAll();
+		return managementUserService.findAll();
 	}
 
 	// Ajouter un user à la BDD
@@ -52,27 +52,26 @@ public class GestionUserController {
 		user.setPassword(request.getPassword());
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
-		gestionUserService.save(user);
-		;
+		managementUserService.save(user);
 	}
 
 	// Supprimer un client à partir de son ID
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") Integer id) {
-		gestionUserService.delete(id);
+		managementUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	// Récupérer un utilisateur par son ID
 	@GetMapping("/user/{id}")
 	public UserDTO getByIdUser(@PathVariable("id") Integer id) {
-		return gestionUserService.findByIdDTO(id);
+		return managementUserService.findByIdDTO(id);
 	}
 
 	// Mise à jour des informations d'un user
 	@PutMapping("update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody User request) {
-		User user = gestionUserService.findById(id);
+		User user = managementUserService.findById(id);
 		user.setAddress(request.getAddress());
 		user.setComment(request.getComment());
 		user.setCreationDate();
@@ -83,7 +82,7 @@ public class GestionUserController {
 		user.setPassword(request.getPassword());
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
-		gestionUserService.save(user);
+		managementUserService.save(user);
 		;
 	}
 

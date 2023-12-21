@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
-public class OuvrageDTO {
+public class WorkDTO {
 
 	private String cote;
 
@@ -35,15 +35,15 @@ public class OuvrageDTO {
 
 	private Boolean availability;
 
-	@NotNull(message = "ID Type de l'Ouvrage obligatoire")
-	private Integer IdTypeOuvrage;
+	@NotNull(message = "ID du type de l'Ouvrage obligatoire")
+	private Integer idTypeWork;
 
-	public Integer getIdTypeOuvrage() {
-		return IdTypeOuvrage;
+	public Integer getIdTypeWork() {
+		return idTypeWork;
 	}
 
-	public void setIdTypeOuvrage(Integer idTypeOuvrage) {
-		IdTypeOuvrage = idTypeOuvrage;
+	public void setIdTypeWork(Integer idTypeWork) {
+		this.idTypeWork = idTypeWork;
 	}
 
 	public String getCote() {

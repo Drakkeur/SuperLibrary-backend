@@ -29,9 +29,9 @@ public class Loan {
 	private Integer status;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_ouvrage", nullable = false)
+	@JoinColumn(name = "id_work", nullable = false)
 	@JsonIgnoreProperties
-	private Ouvrage ouvrage;
+	private Work work;
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinColumn(name = "id_user", nullable = false)
@@ -42,12 +42,12 @@ public class Loan {
 		super();
 	}
 
-	public Loan(LocalDate dateStart, LocalDate theoreticalDateEnd, Integer status, Ouvrage ouvrage, User user) {
+	public Loan(LocalDate dateStart, LocalDate theoreticalDateEnd, Integer status, Work work, User user) {
 		super();
 		this.dateStart = dateStart;
 		this.theoreticalDateEnd = theoreticalDateEnd;
 		this.status = status;
-		this.ouvrage = ouvrage;
+		this.work = work;
 		this.user = user;
 	}
 
@@ -83,12 +83,12 @@ public class Loan {
 		this.status = status;
 	}
 
-	public Ouvrage getOuvrage() {
-		return ouvrage;
+	public Work getWork() {
+		return work;
 	}
 
-	public void setOuvrage(Ouvrage ouvrage) {
-		this.ouvrage = ouvrage;
+	public void setWork(Work work) {
+		this.work = work;
 	}
 
 	public User getUser() {
@@ -105,7 +105,7 @@ public class Loan {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateStart, id, ouvrage, realDateEnd, status, theoreticalDateEnd, user);
+		return Objects.hash(dateStart, id, work, realDateEnd, status, theoreticalDateEnd, user);
 	}
 
 	@Override
@@ -118,7 +118,7 @@ public class Loan {
 			return false;
 		Loan other = (Loan) obj;
 		return Objects.equals(dateStart, other.dateStart) && Objects.equals(id, other.id)
-				&& Objects.equals(ouvrage, other.ouvrage) && Objects.equals(realDateEnd, other.realDateEnd)
+				&& Objects.equals(work, other.work) && Objects.equals(realDateEnd, other.realDateEnd)
 				&& Objects.equals(status, other.status) && Objects.equals(theoreticalDateEnd, other.theoreticalDateEnd)
 				&& Objects.equals(user, other.user);
 	}
@@ -126,7 +126,7 @@ public class Loan {
 	@Override
 	public String toString() {
 		return "Loan [id=" + id + ", dateStart=" + dateStart + ", theoreticalDateEnd=" + theoreticalDateEnd
-				+ ", realDateEnd=" + realDateEnd + ", status=" + status + ", ouvrage=" + ouvrage + ", user=" + user
+				+ ", realDateEnd=" + realDateEnd + ", status=" + status + ", work=" + work + ", user=" + user
 				+ "]";
 	}
 
