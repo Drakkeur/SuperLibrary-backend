@@ -78,14 +78,13 @@ public class ManagementLoanController {
 		loan.setWork(managementWorkService.findById(request.getIdWork()));
 		loan.setUser(managementUserService.findById(request.getIdUser()));
 		managementLoanService.save(loan);
+		managementWorkService.statusWork(request.getIdWork());
 	}
 
 	// Valider une réservation
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
 		managementLoanService.changeStatusLoan(id, "En cours");
-		LoanDTO loanDTO = managementLoanService.findById(id);
-		managementWorkService.statusWork(loanDTO.getIdWork());
 	}
 
 	// Valider un retour d'emprunt
