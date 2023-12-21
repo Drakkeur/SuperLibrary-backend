@@ -3,7 +3,9 @@ package edu.m2i.api_gestion_bibliotheque.dto;
 import java.time.LocalDate;
 
 import jakarta.validation.constraints.Digits;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class UserDTO {
@@ -12,7 +14,7 @@ public class UserDTO {
 	@Digits(integer = 1, fraction = 0, message = "La valeur doit être 0 pour un bibliothécaire ou 1 pour un abonné")
 	private Integer typeUser;
 
-	LocalDate creationDate;
+	private LocalDate creationDate;
 
 	@NotNull(message = "Login obligatoire")
 	@Size(min = 2, max = 30, message = "Nombre de caratères compris entre 2 et 30")
@@ -33,11 +35,14 @@ public class UserDTO {
 	@Size(min = 5, max = 50, message = "Nombre de caratères compris entre 5 et 50")
 	private String address;
 
+	@Email(message = "email non conforpme")
 	@NotNull(message = "email obligatoire")
 	private String email;
 
+	@Pattern(regexp = "^0[1-9]([-. ]?[0-9]{2}){4}$", message = "Le numéro de téléphone doit être au format français.")
 	private String phoneNumber;
 
+	@Size(min = 5, max = 150, message = "Nombre de caratères compris entre 5 et 150")
 	private String comment;
 
 	public UserDTO() {

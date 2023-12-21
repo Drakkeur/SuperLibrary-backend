@@ -4,31 +4,39 @@ import java.time.LocalDate;
 
 import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class OuvrageDTO {
 
 	private String cote;
 
 	@NotNull(message = "Titre obligatoire")
+	@Size(min = 5, max = 50, message = "Nombre de caratères compris entre 5 et 50")
 	private String title;
 
 	@NotNull(message = "Auteur principale obligatoire")
+	@Size(min = 3, max = 30, message = "Nombre de caratères compris entre 3 et 30")
 	private String mainAuthor;
 
+	@Size(min = 5, max = 50, message = "Nombre de caratères compris entre 5 et 50")
 	private String otherAuthor;
 
 	@NotNull(message = "Genre obligatoire")
+	@Size(min = 3, max = 30, message = "Nombre de caratères compris entre 3 et 30")
 	private String genre;
 
 	@NotNull(message = "Editeur obligatoire")
+	@Size(min = 3, max = 30, message = "Nombre de caratères compris entre 3 et 30")
 	private String editor;
 
 	private LocalDate publishedDate;
 
+	@Size(min = 5, max = 150, message = "Nombre de caratères compris entre 5 et 150")
 	private String comment;
 
 	private Boolean availability;
-	
+
+	@NotNull(message = "Type de l'Ouvrage obligatoire")
 	private TypeOuvrage typeOuvrage;
 
 	public TypeOuvrage getTypeOuvrage() {
@@ -110,5 +118,5 @@ public class OuvrageDTO {
 	public void setAvailability(Boolean availability) {
 		this.availability = availability;
 	}
-	
+
 }
