@@ -9,7 +9,9 @@ public interface GestionOuvrageService {
 
 	public List<Ouvrage> findAll();
 
-	public List<Ouvrage> getOuvrage(String filter);
+	public List<Ouvrage> getOuvrageByTitle(String filter);
+	
+	public List<Ouvrage> getOuvrageByAuthor(String filter);
 
 	public Ouvrage findById(Integer id);
 

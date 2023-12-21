@@ -45,9 +45,14 @@ public class GestionOuvrageController {
 		return gestionOuvrageService.findByIdDTO(id);
 	}
 
-	@GetMapping("/{filter}")
-	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter) {
-		return gestionOuvrageService.getOuvrage(filter);
+	@GetMapping("/filter/title={filter}")
+	public List<Ouvrage> getOuvrageByTitle(@PathVariable("filter") String filter) {
+		return gestionOuvrageService.getOuvrageByTitle(filter);
+	}
+	
+	@GetMapping("/filter/author={filter}")
+	public List<Ouvrage> getOuvrageByAuthor(@PathVariable("filter") String filter) {
+		return gestionOuvrageService.getOuvrageByAuthor(filter);
 	}
 
 	@ResponseStatus(HttpStatus.NO_CONTENT)
