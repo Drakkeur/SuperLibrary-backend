@@ -7,7 +7,6 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -34,10 +33,7 @@ public class Work {
 	@Column(nullable = false)
 	private String mainAuthor;
 	private String otherAuthor;
-	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
-	@JoinColumn(name = "id_genreWork", nullable = false)
-	@JsonIgnoreProperties
-	private GenreWork genreWork;
+
 	@Column(nullable = false)
 	private String editor;
 	private LocalDate publishedDate;
@@ -53,6 +49,11 @@ public class Work {
 			CascadeType.REFRESH })
 	@JsonIgnore
 	private List<Loan> loans;
+
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinColumn(name = "id_genreWork", nullable = false)
+	@JsonIgnore
+	private GenreWork genreWork;
 
 	public Work() {
 		super();
@@ -105,11 +106,11 @@ public class Work {
 		this.otherAuthor = otherAuthor;
 	}
 
-	public GenreWork getGenre() {
+	public GenreWork getGenreWork() {
 		return genreWork;
 	}
 
-	public void setGenre(GenreWork genreWork) {
+	public void setGenreWork(GenreWork genreWork) {
 		this.genreWork = genreWork;
 	}
 
@@ -195,9 +196,9 @@ public class Work {
 	@Override
 	public String toString() {
 		return "Work [id=" + id + ", cote=" + cote + ", title=" + title + ", mainAuthor=" + mainAuthor
-				+ ", otherAuthor=" + otherAuthor + ", genre=" + genreWork + ", editor=" + editor + ", publishedDate="
-				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork="
-				+ typeWork + "]";
+				+ ", otherAuthor=" + otherAuthor + ", genreWork=" + genreWork + ", editor=" + editor
+				+ ", publishedDate=" + publishedDate + ", comment=" + comment + ", availability=" + availability
+				+ ", typeWork=" + typeWork + "]";
 	}
 
 }

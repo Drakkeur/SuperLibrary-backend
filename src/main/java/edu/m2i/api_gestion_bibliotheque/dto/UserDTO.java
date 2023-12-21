@@ -19,7 +19,7 @@ public class UserDTO {
 	private String login;
 
 	@NotNull(message = "Mot de passe obligatoire")
-	@Size(min = 10, max = 30, message = "Nombre de caratères compris entre 2 et 30")
+	@Size(min = 10, max = 30, message = "Nombre de caratères compris entre 10 et 30")
 	private String password;
 
 	@NotNull(message = "Nom obligatoire")
@@ -42,15 +42,15 @@ public class UserDTO {
 
 	@Size(min = 5, max = 150, message = "Nombre de caratères compris entre 5 et 150")
 	private String comment;
-	
+
 	private LocalDate creationDate;
 
 	public UserDTO() {
 
 	}
 
-	public UserDTO(Integer typeUser, String login, String password, String name,
-			String firstname, String address, String email, String phoneNumber, String comment) {
+	public UserDTO(Integer typeUser, String login, String password, String name, String firstname, String address,
+			String email, String phoneNumber, String comment) {
 		super();
 		this.typeUser = typeUser;
 		this.login = login;
