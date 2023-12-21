@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -43,11 +43,12 @@ public class Work {
 
 	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinColumn(name = "id_typeWork", nullable = false)
-	@JsonIgnoreProperties
+	@JsonIgnore
 	private TypeWork typeWork;
 
 	@OneToMany(mappedBy = "work", cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
 			CascadeType.REFRESH })
+	@JsonIgnore
 	private List<Loan> loans;
 
 	public Work() {
@@ -192,8 +193,8 @@ public class Work {
 	public String toString() {
 		return "Work [id=" + id + ", cote=" + cote + ", title=" + title + ", mainAuthor=" + mainAuthor
 				+ ", otherAuthor=" + otherAuthor + ", genre=" + genre + ", editor=" + editor + ", publishedDate="
-				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork="
-				+ typeWork + "]";
+				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork=" + typeWork
+				+ "]";
 	}
 
 }

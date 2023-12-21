@@ -59,12 +59,12 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 
 	@Override
 	public List<Loan> getByUser(Integer id) {
-		return loanRepository.findByUser(managementUserService.findById(id));
+		return managementUserService.findById(id).getLoans();
 	}
 
 	@Override
 	public List<Loan> getByWork(Integer id) {
-		return loanRepository.findByWork(managementWorkService.findById(id));
+		return managementWorkService.findById(id).getLoans();
 	}
 
 	@Override
