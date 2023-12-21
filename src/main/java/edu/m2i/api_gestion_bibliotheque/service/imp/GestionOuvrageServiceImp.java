@@ -52,5 +52,14 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 	public void delete(Integer id) {
 		ouvrageRepository.deleteById(id);
 	}
+	
+	public void statusOuvrage(Integer id) {
+		Ouvrage ouvrage = ouvrageRepository.getReferenceById(id);
+		ouvrageRepository.deleteById(id);
+		if (ouvrage.getAvailability() == true) {
+			ouvrage.setAvailability(false);
+		}else {ouvrage.setAvailability(true);}
+		ouvrageRepository.save(ouvrage);
+	}
 
 }
