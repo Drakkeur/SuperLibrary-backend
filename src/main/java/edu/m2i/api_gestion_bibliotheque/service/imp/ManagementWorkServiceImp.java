@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
+import edu.m2i.api_gestion_bibliotheque.entity.GenreWork;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
 import edu.m2i.api_gestion_bibliotheque.entity.Work;
 import edu.m2i.api_gestion_bibliotheque.repository.WorkRepository;
@@ -26,12 +27,12 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 	public WorkDTO findByIdDTO(Integer id) {
 		Work work = workRepository.getReferenceById(id);
 		TypeWork typeWork = work.getTypeWork();
+		GenreWork genreWork = work.getGenre();
 		WorkDTO workDTO = new WorkDTO();
-		workDTO.setCote(work.getCote());
 		workDTO.setTitle(work.getTitle());
 		workDTO.setMainAuthor(work.getMainAuthor());
 		workDTO.setOtherAuthor(work.getOtherAuthor());
-		workDTO.setGenre(work.getGenre());
+		workDTO.setIdGenreWork(genreWork.getId());
 		workDTO.setEditor(work.getEditor());
 		workDTO.setPublishedDate(work.getPublishedDate());
 		workDTO.setComment(work.getComment());
@@ -59,12 +60,12 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 	public WorkDTO save(Work work) {
 		workRepository.save(work);
 		TypeWork typeWork = work.getTypeWork();
+		GenreWork genreWork = work.getGenre();
 		WorkDTO workDTO = new WorkDTO();
-		workDTO.setCote(work.getCote());
 		workDTO.setTitle(work.getTitle());
 		workDTO.setMainAuthor(work.getMainAuthor());
 		workDTO.setOtherAuthor(work.getOtherAuthor());
-		workDTO.setGenre(work.getGenre());
+		workDTO.setIdGenreWork(genreWork.getId());
 		workDTO.setEditor(work.getEditor());
 		workDTO.setPublishedDate(work.getPublishedDate());
 		workDTO.setComment(work.getComment());

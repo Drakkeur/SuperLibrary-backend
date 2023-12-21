@@ -20,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.WorkDTO;
-import edu.m2i.api_gestion_bibliotheque.entity.Work;
+import edu.m2i.api_gestion_bibliotheque.entity.GenreWork;
 import edu.m2i.api_gestion_bibliotheque.entity.TypeWork;
+import edu.m2i.api_gestion_bibliotheque.entity.Work;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementGenreWorkService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
@@ -34,6 +36,8 @@ public class ManagementWorkController {
 	ManagementWorkService managementWorkService;
 	@Autowired
 	ManagementTypeWorkService managementTypeWorkService;
+	@Autowired
+	ManagementGenreWorkService managementGenreWorkService;
 
 	@GetMapping("/all")
 	public List<Work> getAllWorks() {
@@ -58,10 +62,13 @@ public class ManagementWorkController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteWork(@PathVariable("id") Integer id) {
-		Work Work = managementWorkService.findById(id);
-		TypeWork typeWork = Work.getTypeWork();
+		Work work = managementWorkService.findById(id);
+		TypeWork typeWork = work.getTypeWork();
 		typeWork.setCount(typeWork.getCount() - 1);
 		managementTypeWorkService.save(typeWork);
+		GenreWork genreWork = work.getGenre();
+		genreWork.setCount(genreWork.getCount() - 1);
+		managementGenreWorkService.save(genreWork);
 		managementWorkService.delete(id);
 	}
 
@@ -70,21 +77,21 @@ public class ManagementWorkController {
 	public void addWorks(@Valid @RequestBody WorkDTO request) {
 		Work work = new Work();
 		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
-		work.setCote(request.getCote());
+		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
-		work.setGenre(request.getGenre());
+		work.setGenre(genreWork);
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
-		work.setAvailability(request.getAvailability());
+		work.setAvailability(true);
 		work.setTypeWork(typeWork);
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
 		typeWork.setCount(typeWork.getCount()+1);
 		managementTypeWorkService.save(typeWork);
+		genreWork.setCount(genreWork.getCount()+1);
+		managementGenreWorkService.save(genreWork);
 	}
 
 	@PutMapping("change-status/{id}")
@@ -95,16 +102,14 @@ public class ManagementWorkController {
 	@PutMapping("update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody WorkDTO request) {
 		Work work = managementWorkService.findById(id);
-		work.setCote(request.getCote());
 		work.setTitle(request.getTitle());
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
-		work.setGenre(request.getGenre());
+		work.setGenre(managementGenreWorkService.findById(request.getIdGenreWork()));
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(request.getAvailability());
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
 		managementWorkService.save(work);
 	}
