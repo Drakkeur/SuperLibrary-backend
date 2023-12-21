@@ -7,6 +7,7 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.CascadeType;
@@ -33,8 +34,10 @@ public class Work {
 	@Column(nullable = false)
 	private String mainAuthor;
 	private String otherAuthor;
-	@Column(nullable = false)
-	private String genre;
+	@ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+	@JoinColumn(name = "id_genreWork", nullable = false)
+	@JsonIgnoreProperties
+	private GenreWork genreWork;
 	@Column(nullable = false)
 	private String editor;
 	private LocalDate publishedDate;
@@ -55,14 +58,14 @@ public class Work {
 		super();
 	}
 
-	public Work(String cote, String title, String mainAuthor, String otherAuthor, String genre, String editor,
+	public Work(String cote, String title, String mainAuthor, String otherAuthor, GenreWork genreWork, String editor,
 			LocalDate publishedDate, String comment, Boolean availability, TypeWork typeWork) {
 		super();
 		this.cote = cote;
 		this.title = title;
 		this.mainAuthor = mainAuthor;
 		this.otherAuthor = otherAuthor;
-		this.genre = genre;
+		this.genreWork = genreWork;
 		this.editor = editor;
 		this.publishedDate = publishedDate;
 		this.comment = comment;
@@ -102,12 +105,12 @@ public class Work {
 		this.otherAuthor = otherAuthor;
 	}
 
-	public String getGenre() {
-		return genre;
+	public GenreWork getGenre() {
+		return genreWork;
 	}
 
-	public void setGenre(String genre) {
-		this.genre = genre;
+	public void setGenre(GenreWork genreWork) {
+		this.genreWork = genreWork;
 	}
 
 	public String getEditor() {
@@ -168,7 +171,7 @@ public class Work {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(availability, comment, cote, editor, genre, id, mainAuthor, otherAuthor, publishedDate,
+		return Objects.hash(availability, comment, cote, editor, genreWork, id, mainAuthor, otherAuthor, publishedDate,
 				title, typeWork);
 	}
 
@@ -183,7 +186,7 @@ public class Work {
 		Work other = (Work) obj;
 		return Objects.equals(availability, other.availability) && Objects.equals(comment, other.comment)
 				&& Objects.equals(cote, other.cote) && Objects.equals(editor, other.editor)
-				&& Objects.equals(genre, other.genre) && Objects.equals(id, other.id)
+				&& Objects.equals(genreWork, other.genreWork) && Objects.equals(id, other.id)
 				&& Objects.equals(mainAuthor, other.mainAuthor) && Objects.equals(otherAuthor, other.otherAuthor)
 				&& Objects.equals(publishedDate, other.publishedDate) && Objects.equals(title, other.title)
 				&& Objects.equals(typeWork, other.typeWork);
@@ -192,9 +195,9 @@ public class Work {
 	@Override
 	public String toString() {
 		return "Work [id=" + id + ", cote=" + cote + ", title=" + title + ", mainAuthor=" + mainAuthor
-				+ ", otherAuthor=" + otherAuthor + ", genre=" + genre + ", editor=" + editor + ", publishedDate="
-				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork=" + typeWork
-				+ "]";
+				+ ", otherAuthor=" + otherAuthor + ", genre=" + genreWork + ", editor=" + editor + ", publishedDate="
+				+ publishedDate + ", comment=" + comment + ", availability=" + availability + ", typeWork="
+				+ typeWork + "]";
 	}
 
 }
