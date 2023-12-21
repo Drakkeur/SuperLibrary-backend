@@ -21,8 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.m2i.api_gestion_bibliotheque.dto.LoanDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Loan;
-import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
 import edu.m2i.api_gestion_bibliotheque.entity.Work;
+import edu.m2i.api_gestion_bibliotheque.service.ManagementLoanService;
 import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
@@ -35,9 +35,8 @@ public class ManagementLoanController {
 	@Autowired
 	ManagementWorkService managementWorkService;
 
-
 	// Récupérer la liste complète des emprunts
-	@GetMapping("/loans")
+	@GetMapping("/all")
 	public List<Loan> getAllLoan() {
 		return managementLoanService.findAll();
 	}

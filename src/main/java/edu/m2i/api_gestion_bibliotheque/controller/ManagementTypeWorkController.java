@@ -31,8 +31,8 @@ public class ManagementTypeWorkController {
 	@Autowired
 	ManagementTypeWorkService managementTypeWorkService;
 
-	// Récupérer la liste complète des types d'Work
-	@GetMapping("/typesWork")
+	// Récupérer la liste complète des types d'ouvrage
+	@GetMapping("/all")
 	public List<TypeWork> getAllTypeWork() {
 		return managementTypeWorkService.findAll();
 	}
