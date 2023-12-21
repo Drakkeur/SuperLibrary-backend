@@ -34,7 +34,7 @@ public class GestionUserServiceImp implements GestionUserService {
 	}
 
 	@Override
-	public UserDTO findById(Integer id) {
+	public UserDTO findByIdDTO(Integer id) {
 		User user = userRepository.getReferenceById(id);
 		UserDTO userDTO = new UserDTO();
 		// to do : gérer affichage ou non du login et mot de passe
@@ -59,6 +59,12 @@ public class GestionUserServiceImp implements GestionUserService {
 	@Override
 	public void delete(Integer id) {
 		userRepository.deleteById(id);
+	}
+
+	@Override
+	public User findById(Integer id) {
+		User user = userRepository.getReferenceById(id);
+		return user;
 	}
 
 }

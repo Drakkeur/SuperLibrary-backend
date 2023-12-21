@@ -26,18 +26,18 @@ import edu.m2i.api_gestion_bibliotheque.service.GestionUserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-user")
+@RequestMapping("/api-superlibrary/user")
 public class GestionUserController {
-	
+
 	@Autowired
 	GestionUserService gestionUserService;
-	
+
 	// Récupérer la liste de users dans la BDD
 	@GetMapping("users")
-	public List<User> getUserList(){
+	public List<User> getUserList() {
 		return gestionUserService.findAll();
 	}
-	
+
 	// Ajouter un user à la BDD
 	@PostMapping("add")
 	public void addUser(@Valid @RequestBody UserDTO request) {
@@ -52,32 +52,51 @@ public class GestionUserController {
 		user.setPassword(request.getPassword());
 		user.setPhoneNumber(request.getPhoneNumber());
 		user.setTypeUser(request.getTypeUser());
-		gestionUserService.save(user);;
+		gestionUserService.save(user);
+		;
 	}
-	
+
 	// Supprimer un client à partir de son ID
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<UserDTO> deleteUser(@PathVariable("id") Integer id) {
 		gestionUserService.delete(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	// Mise à jour des informations d'un user
-	@PutMapping("update")
-	public void updateUser(@RequestBody User user) {
-		gestionUserService.save(user);
+
+	// Récupérer un utilisateur par son ID
+	@GetMapping("/user/{id}")
+	public UserDTO getByIdUser(@PathVariable("id") Integer id) {
+		return gestionUserService.findByIdDTO(id);
 	}
-	
-	// On peut rajouter différentes manières d'update un client avec des RequestParam dans l'url plus tard
-	
+
+	// Mise à jour des informations d'un user
+	@PutMapping("update/{id}")
+	public void updateUser(@PathVariable("id") Integer id, @RequestBody User request) {
+		User user = gestionUserService.findById(id);
+		user.setAddress(request.getAddress());
+		user.setComment(request.getComment());
+		user.setCreationDate();
+		user.setEmail(request.getEmail());
+		user.setFirstname(request.getFirstname());
+		user.setLogin(request.getLogin());
+		user.setName(request.getName());
+		user.setPassword(request.getPassword());
+		user.setPhoneNumber(request.getPhoneNumber());
+		user.setTypeUser(request.getTypeUser());
+		gestionUserService.save(user);
+		;
+	}
+
+	// On peut rajouter différentes manières d'update un client avec des
+	// RequestParam dans l'url plus tard
+
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public Map<String, String> handleValidationException(MethodArgumentNotValidException e) {
 		Map<String, String> erreurs = new HashMap<>();
-		e.getBindingResult()
-		.getAllErrors()
-		.forEach(err -> erreurs.put(((FieldError) err).getField(),  err.getDefaultMessage()));
+		e.getBindingResult().getAllErrors()
+				.forEach(err -> erreurs.put(((FieldError) err).getField(), err.getDefaultMessage()));
 		return erreurs;
 	}
-		
+
 }
