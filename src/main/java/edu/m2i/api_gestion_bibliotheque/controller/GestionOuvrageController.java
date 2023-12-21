@@ -39,9 +39,9 @@ public class GestionOuvrageController {
 		return gestionOuvrageService.findAll();
 	}
 
-	@GetMapping("/{id}")
-	public Ouvrage getOuvrage(@PathVariable("id") Integer id) {
-		return gestionOuvrageService.findById(id);
+	@GetMapping("/id/{id}")
+	public OuvrageDTO getByIdOuvrage(@PathVariable("id") Integer id) {
+		return gestionOuvrageService.findByIdDTO(id);
 	}
 
 	@GetMapping("/{filter}")
@@ -72,7 +72,7 @@ public class GestionOuvrageController {
 		gestionOuvrageService.save(ouvrage);
 	}
 
-	@GetMapping("change-status/{id}")
+	@PutMapping("change-status/{id}")
 	public void statusOuvrage(@PathVariable("id") Integer id) {
 		gestionOuvrageService.statusOuvrage(id);
 	}

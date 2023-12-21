@@ -13,10 +13,12 @@ public interface GestionOuvrageService {
 
 	public Ouvrage findById(Integer id);
 
+	public OuvrageDTO findByIdDTO(Integer id);
+
 	public OuvrageDTO save(Ouvrage ouvrage);
 
 	public void delete(Integer id);
-	
+
 	public void statusOuvrage(Integer id);
 
 }

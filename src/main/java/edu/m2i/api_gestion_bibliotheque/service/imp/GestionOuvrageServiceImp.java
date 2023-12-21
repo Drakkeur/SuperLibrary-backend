@@ -23,8 +23,27 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 	}
 
 	@Override
+	public OuvrageDTO findByIdDTO(Integer id) {
+		Ouvrage ouvrage = ouvrageRepository.getReferenceById(id);
+		TypeOuvrage typeOuvrage = ouvrage.getTypeOuvrage();
+		OuvrageDTO ouvrageDTO = new OuvrageDTO();
+		ouvrageDTO.setCote(ouvrage.getCote());
+		ouvrageDTO.setTitle(ouvrage.getTitle());
+		ouvrageDTO.setMainAuthor(ouvrage.getMainAuthor());
+		ouvrageDTO.setOtherAuthor(ouvrage.getOtherAuthor());
+		ouvrageDTO.setGenre(ouvrage.getGenre());
+		ouvrageDTO.setEditor(ouvrage.getEditor());
+		ouvrageDTO.setPublishedDate(ouvrage.getPublishedDate());
+		ouvrageDTO.setComment(ouvrage.getComment());
+		ouvrageDTO.setAvailability(ouvrage.getAvailability());
+		ouvrageDTO.setIdTypeOuvrage(typeOuvrage.getId());
+		return ouvrageDTO;
+	}
+
+	@Override
 	public Ouvrage findById(Integer id) {
-		return ouvrageRepository.getReferenceById(id);
+		Ouvrage ouvrage = ouvrageRepository.getReferenceById(id);
+		return ouvrage;
 	}
 
 	@Override
