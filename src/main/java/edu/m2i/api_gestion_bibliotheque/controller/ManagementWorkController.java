@@ -26,7 +26,7 @@ import edu.m2i.api_gestion_bibliotheque.service.ManagementWorkService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-superlibrary/ouvrages")
+@RequestMapping("/api-superlibrary/work")
 public class ManagementWorkController {
 
 	@Autowired

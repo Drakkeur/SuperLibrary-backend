@@ -16,8 +16,8 @@ public interface LoanRepository extends JpaRepository<Loan, Integer> {
 	List<Loan> getUserById(Integer idUser);
 
 	// Récupérer les emprunts d'un ouvrage
-	@Query("SELECT l FROM Loan l WHERE l.ouvrage=?1")
-	List<Loan> getOuvrageById(Integer idOuvrage);
+	@Query("SELECT l FROM Loan l WHERE l.work=?1")
+	List<Loan> getWorkById(Integer idWork);
 
 	// Récupérer les emprunts par status
 	@Query("SELECT l FROM Loan l WHERE l.status=?1")

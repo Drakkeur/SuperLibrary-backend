@@ -25,14 +25,14 @@ import edu.m2i.api_gestion_bibliotheque.service.ManagementTypeWorkService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api-superlibrary/type-ouvrage")
+@RequestMapping("/api-superlibrary/type-work")
 public class ManagementTypeWorkController {
 
 	@Autowired
 	ManagementTypeWorkService managementTypeWorkService;
 
 	// Récupérer la liste complète des types d'ouvrage
-	@GetMapping("/typesouvrage")
+	@GetMapping("/all")
 	public List<TypeWork> getAllTypeWork() {
 		return managementTypeWorkService.findAll();
 	}
