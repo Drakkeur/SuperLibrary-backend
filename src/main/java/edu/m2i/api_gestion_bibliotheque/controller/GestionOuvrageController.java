@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
 import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
+import edu.m2i.api_gestion_bibliotheque.service.GestionTypeOuvrageService;
 import jakarta.validation.Valid;
 
 @RestController
@@ -30,6 +31,8 @@ public class GestionOuvrageController {
 
 	@Autowired
 	GestionOuvrageService gestionOuvrageService;
+	@Autowired
+	GestionTypeOuvrageService gestionTypeOuvrageService;
 
 	@GetMapping("/all")
 	public List<Ouvrage> getAllOuvrages() {
@@ -40,12 +43,12 @@ public class GestionOuvrageController {
 	public Ouvrage getOuvrage(@PathVariable("id") Integer id) {
 		return gestionOuvrageService.findById(id);
 	}
-	
+
 	@GetMapping("/{filter}")
-	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter){
+	public List<Ouvrage> getOuvrage(@PathVariable("filter") String filter) {
 		return gestionOuvrageService.getOuvrage(filter);
 	}
-	
+
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteOuvrage(@PathVariable("id") Integer id) {
@@ -65,15 +68,15 @@ public class GestionOuvrageController {
 		ouvrage.setPublishedDate(request.getPublishedDate());
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
+		ouvrage.setTypeOuvrage(gestionTypeOuvrageService.getById(request.getIdTypeOuvrage()));
 		gestionOuvrageService.save(ouvrage);
 	}
-	
+
 	@GetMapping("change-status/{id}")
 	public void statusOuvrage(@PathVariable("id") Integer id) {
 		gestionOuvrageService.statusOuvrage(id);
 	}
-	
+
 	@PutMapping("update/{id}")
 	public void updateUser(@PathVariable("id") Integer id, @RequestBody OuvrageDTO request) {
 		Ouvrage ouvrage = gestionOuvrageService.findById(id);
@@ -86,7 +89,7 @@ public class GestionOuvrageController {
 		ouvrage.setPublishedDate(request.getPublishedDate());
 		ouvrage.setComment(request.getComment());
 		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeOuvrage(request.getTypeOuvrage());
+		ouvrage.setTypeOuvrage(gestionTypeOuvrageService.getById(request.getIdTypeOuvrage()));
 		gestionOuvrageService.save(ouvrage);
 	}
 

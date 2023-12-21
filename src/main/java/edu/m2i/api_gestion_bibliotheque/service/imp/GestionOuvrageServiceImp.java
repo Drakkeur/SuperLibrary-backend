@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import edu.m2i.api_gestion_bibliotheque.dto.OuvrageDTO;
 import edu.m2i.api_gestion_bibliotheque.entity.Ouvrage;
+import edu.m2i.api_gestion_bibliotheque.entity.TypeOuvrage;
 import edu.m2i.api_gestion_bibliotheque.repository.OuvrageRepository;
 import edu.m2i.api_gestion_bibliotheque.service.GestionOuvrageService;
 
@@ -34,6 +35,7 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 	@Override
 	public OuvrageDTO save(Ouvrage ouvrage) {
 		ouvrageRepository.save(ouvrage);
+		TypeOuvrage typeOuvrage = ouvrage.getTypeOuvrage();
 		OuvrageDTO ouvrageDTO = new OuvrageDTO();
 		ouvrageDTO.setCote(ouvrage.getCote());
 		ouvrageDTO.setTitle(ouvrage.getTitle());
@@ -44,7 +46,7 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 		ouvrageDTO.setPublishedDate(ouvrage.getPublishedDate());
 		ouvrageDTO.setComment(ouvrage.getComment());
 		ouvrageDTO.setAvailability(ouvrage.getAvailability());
-		ouvrageDTO.setTypeOuvrage(ouvrage.getTypeOuvrage());
+		ouvrageDTO.setIdTypeOuvrage(typeOuvrage.getId());
 		return ouvrageDTO;
 	}
 
@@ -52,13 +54,15 @@ public class GestionOuvrageServiceImp implements GestionOuvrageService {
 	public void delete(Integer id) {
 		ouvrageRepository.deleteById(id);
 	}
-	
+
 	public void statusOuvrage(Integer id) {
 		Ouvrage ouvrage = ouvrageRepository.getReferenceById(id);
 		ouvrageRepository.deleteById(id);
 		if (ouvrage.getAvailability() == true) {
 			ouvrage.setAvailability(false);
-		}else {ouvrage.setAvailability(true);}
+		} else {
+			ouvrage.setAvailability(true);
+		}
 		ouvrageRepository.save(ouvrage);
 	}
 
