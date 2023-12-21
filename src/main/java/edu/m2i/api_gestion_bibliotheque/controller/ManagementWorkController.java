@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,44 +29,65 @@ import jakarta.validation.Valid;
 public class ManagementWorkController {
 
 	@Autowired
-	ManagementWorkService gestionOuvrageService;
+	ManagementWorkService managementWorkService;
 
 	@GetMapping("/all")
 	public List<Work> getAllOuvrages() {
-		return gestionOuvrageService.findAll();
+		return managementWorkService.findAll();
 	}
 
 	@GetMapping("/{id}")
 	public Work getOuvrage(@PathVariable("id") Integer id) {
-		return gestionOuvrageService.findById(id);
+		return managementWorkService.findById(id);
 	}
 	
 	@GetMapping("/{filter}")
 	public List<Work> getOuvrage(@PathVariable("filter") String filter){
-		return gestionOuvrageService.getWork(filter);
+		return managementWorkService.getWork(filter);
 	}
 	
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	@DeleteMapping("/delete/{id}")
 	public void deleteWork(@PathVariable("id") Integer id) {
-		gestionOuvrageService.delete(id);
+		managementWorkService.delete(id);
 	}
 
 	@ResponseStatus(HttpStatus.CREATED)
 	@PostMapping("/add")
-	public void addOuvrages(@Valid @RequestBody WorkDTO request) {
-		Work ouvrage = new Work();
-		ouvrage.setCote(request.getCote());
-		ouvrage.setTitle(request.getTitle());
-		ouvrage.setMainAuthor(request.getMainAuthor());
-		ouvrage.setOtherAuthor(request.getOtherAuthor());
-		ouvrage.setGenre(request.getGenre());
-		ouvrage.setEditor(request.getEditor());
-		ouvrage.setPublishedDate(request.getPublishedDate());
-		ouvrage.setComment(request.getComment());
-		ouvrage.setAvailability(request.getAvailability());
-		ouvrage.setTypeWork(request.getTypeWork());
-		gestionOuvrageService.save(ouvrage);
+	public void addWork(@Valid @RequestBody WorkDTO request) {
+		Work work = new Work();
+		work.setCote(request.getCote());
+		work.setTitle(request.getTitle());
+		work.setMainAuthor(request.getMainAuthor());
+		work.setOtherAuthor(request.getOtherAuthor());
+		work.setGenre(request.getGenre());
+		work.setEditor(request.getEditor());
+		work.setPublishedDate(request.getPublishedDate());
+		work.setComment(request.getComment());
+		work.setAvailability(request.getAvailability());
+		work.setTypeWork(request.getTypeWork());
+		managementWorkService.save(work);
+	}
+	
+	@GetMapping("change-status/{id}")
+	public void statusWork(@PathVariable("id") Integer id) {
+		managementWorkService.statusWork(id);
+	}
+	
+	@PutMapping("update/{id}")
+	public void updateUser(@PathVariable("id") Integer id, @RequestBody WorkDTO request) {
+		Work work = managementWorkService.findById(id);
+		work.setCote(request.getCote());
+		work.setTitle(request.getTitle());
+		work.setMainAuthor(request.getMainAuthor());
+		work.setOtherAuthor(request.getOtherAuthor());
+		work.setGenre(request.getGenre());
+		work.setEditor(request.getEditor());
+		work.setPublishedDate(request.getPublishedDate());
+		work.setComment(request.getComment());
+		work.setAvailability(request.getAvailability());
+		work.setTypeWork(request.getTypeWork());
+		managementWorkService.save(work);
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

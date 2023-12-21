@@ -55,8 +55,8 @@ public class ManagementTypeWorkController {
 
 	// Modifier un type d'ouvrage déjà présent dans la DB
 	@PutMapping("/update/{id}")
-	public void updateTypeOuvrage(@RequestBody TypeWorkDTO typeWorkDTO) {
-		TypeWork typeWork = new TypeWork();
+	public void updateTypeWork(@PathVariable("id") Integer id, @RequestBody TypeWorkDTO typeWorkDTO) {
+		TypeWork typeWork = managementTypeWorkService.getById(id);
 		typeWork.setName(typeWorkDTO.getName());
 		managementTypeWorkService.save(typeWork);
 	}
