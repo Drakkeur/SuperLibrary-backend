@@ -8,7 +8,9 @@ import edu.m2i.api_gestion_bibliotheque.entity.Loan;
 public interface ManagementLoanService {
 	LoanDTO save(Loan loan);
 
-	LoanDTO findById(Integer id);
+	LoanDTO findByIdDTO(Integer id);
+
+	Loan findById(Integer id);
 
 	List<Loan> findAll();
 
@@ -19,7 +21,5 @@ public interface ManagementLoanService {
 	List<Loan> getByWork(Integer idWork);
 
 	List<Loan> getByStatus(Integer status);
-
-	void changeStatusLoan(Integer id, String status);
 
 }

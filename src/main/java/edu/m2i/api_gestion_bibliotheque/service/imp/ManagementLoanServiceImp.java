@@ -1,6 +1,5 @@
 package edu.m2i.api_gestion_bibliotheque.service.imp;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 	}
 
 	@Override
-	public LoanDTO findById(Integer id) {
+	public LoanDTO findByIdDTO(Integer id) {
 		Loan loan = loanRepository.getReferenceById(id);
 		LoanDTO loanDTO = new LoanDTO();
 		loanDTO.setDateStart(loan.getDateStart());
@@ -74,17 +73,8 @@ public class ManagementLoanServiceImp implements ManagementLoanService {
 	}
 
 	@Override
-	public void changeStatusLoan(Integer id, String status) {
-		Loan loan = loanRepository.getReferenceById(id);
-		if (status == "En attente") {
-			loan.setStatus(1);
-		} else if (status == "En cours") {
-			loan.setStatus(2);
-		} else if (status == "Terminé") {
-			loan.setStatus(0);
-			loan.setRealDateEnd(LocalDate.now());
-			managementWorkService.statusWork(managementWorkService.findById(id).getId());
-		}
+	public Loan findById(Integer id) {
+		return loanRepository.getReferenceById(id);
 	}
 
 }

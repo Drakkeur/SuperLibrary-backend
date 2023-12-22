@@ -1,5 +1,6 @@
 package edu.m2i.api_gestion_bibliotheque.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class ManagementLoanController {
 	// Récupérer un emprunt par ID
 	@GetMapping("/loan/{id}")
 	public LoanDTO getLoan(@PathVariable("id") Integer id) {
-		return managementLoanService.findById(id);
+		return managementLoanService.findByIdDTO(id);
 	}
 
 	// Faire une réservation
@@ -84,15 +85,21 @@ public class ManagementLoanController {
 	// Valider une réservation
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
-		managementLoanService.changeStatusLoan(id, "En cours");
+		managementLoanService.findById(id).setStatus(2);
+	}
+
+	// Refuser une réservation
+	@DeleteMapping("/refuse-reservation/{id}")
+	public void refuseReservation(@PathVariable("id") Integer id) {
+		managementLoanService.delete(id);
 	}
 
 	// Valider un retour d'emprunt
 	@PutMapping("/validate-return/{id}")
 	public void validateReturn(@PathVariable("id") Integer id) {
-		managementLoanService.changeStatusLoan(id, "Terminé");
-		LoanDTO loanDTO = managementLoanService.findById(id);
-		managementWorkService.statusWork(loanDTO.getIdWork());
+		managementLoanService.findById(id).setStatus(0);
+		managementLoanService.findById(id).setRealDateEnd(LocalDate.now());
+		managementWorkService.statusWork(managementWorkService.findById(id).getId());
 	}
 
 	// Supprimer un emprunt
