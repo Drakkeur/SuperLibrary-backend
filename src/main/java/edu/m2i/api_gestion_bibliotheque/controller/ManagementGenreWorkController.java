@@ -47,6 +47,7 @@ public class ManagementGenreWorkController {
 	@PostMapping("/add")
 	public void addGenreWork(@Valid @RequestBody GenreWorkDTO request) {
 		GenreWork genreWork = new GenreWork();
+		genreWork.setId(request.getId());
 		genreWork.setName(request.getName());
 		genreWork.setCount(0);
 		managementGenreWorkService.save(genreWork);

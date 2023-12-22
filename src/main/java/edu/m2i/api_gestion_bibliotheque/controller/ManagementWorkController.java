@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
@@ -43,6 +44,11 @@ public class ManagementWorkController {
 	public List<Work> getAllWorks() {
 		return managementWorkService.findAll();
 	}
+	
+//	@GetMapping("/available")
+//	public List<Work> getAvailableWorks() {
+//		return managementWorkService.getAvailable();
+//	}
 
 	@GetMapping("/id/{id}")
 	public WorkDTO getOuvrage(@PathVariable("id") Integer id) {
@@ -76,18 +82,19 @@ public class ManagementWorkController {
 	@PostMapping("/add")
 	public void addWorks(@Valid @RequestBody WorkDTO request) {
 		Work work = new Work();
+		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
+		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		work.setTitle(request.getTitle());
+		work.setCote(StringUtils.upperCase(""+typeWork.getId()+genreWork.getId()+StringUtils.left(request.getMainAuthor(),3)+StringUtils.left(request.getTitle(),3)));
 		work.setMainAuthor(request.getMainAuthor());
 		work.setOtherAuthor(request.getOtherAuthor());
 		work.setEditor(request.getEditor());
 		work.setPublishedDate(request.getPublishedDate());
 		work.setComment(request.getComment());
 		work.setAvailability(true);
-		work.setTypeWork(managementTypeWorkService.findById(request.getIdTypeWork()));
-		work.setGenreWork(managementGenreWorkService.findById(request.getIdGenreWork()));
+		work.setTypeWork(typeWork);
+		work.setGenreWork(genreWork);
 		managementWorkService.save(work);
-		TypeWork typeWork = managementTypeWorkService.findById(request.getIdTypeWork());
-		GenreWork genreWork = managementGenreWorkService.findById(request.getIdGenreWork());
 		typeWork.setCount(typeWork.getCount() + 1);
 		managementTypeWorkService.save(typeWork);
 		genreWork.setCount(genreWork.getCount() + 1);
