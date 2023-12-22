@@ -12,6 +12,8 @@ public interface ManagementWorkService {
 	public List<Work> getWorkByTitle(String filter);
 	
 	public List<Work> getWorkByAuthor(String filter);
+	
+//	public List<Work> getAvailable();
 
 	Work findById(Integer id);
 

@@ -84,4 +84,10 @@ public class ManagementWorkServiceImp implements ManagementWorkService {
 		workRepository.save(work);
 	}
 
+//	@Override
+//	public List<Work> getAvailable() {
+//		List<Work> works = workRepository.getAvailable();
+//		return works;
+//	}
+
 }
