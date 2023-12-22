@@ -85,7 +85,9 @@ public class ManagementLoanController {
 	// Valider une réservation
 	@PutMapping("/validate-reservation/{id}")
 	public void validateReservation(@PathVariable("id") Integer id) {
-		managementLoanService.findById(id).setStatus(2);
+		Loan loan = managementLoanService.findById(id);
+		loan.setStatus(2);
+		managementLoanService.save(loan);
 	}
 
 	// Refuser une réservation
